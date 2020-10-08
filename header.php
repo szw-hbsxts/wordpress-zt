@@ -17,6 +17,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=10.0, user-scalable=yes">
 	<link rel="profile" href="http://gmpg.org/xfn/11">
 	<?php wp_head(); ?>
+	<link rel="stylesheet" href="<?php echo get_template_directory_uri().'/assets/css/index.css';?>">
+	<script src="<?php echo get_template_directory_uri().'/assets/js/vue.js';?>"></script>
 </head>
 
 <body <?php body_class(); ?>>

@@ -16,7 +16,7 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 	return;
 }
 ?>
-<li 
+<li
 <?php
 if ( function_exists( 'wc_product_class' ) ) {
 	wc_product_class( '', $product );

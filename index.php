@@ -12,27 +12,47 @@
  * @package customify
  */
 
-get_header(); ?>
-	<div class="content-inner">
-		<?php
-		do_action( 'customify/content/before' );
-		if ( is_singular() ) {
-			if ( ! customify_is_e_theme_location( 'single' ) ) {
-				customify_blog_posts_heading();
-				customify_blog_posts();
-			}
-		} elseif ( is_archive() || is_home() || is_search() ) {
-			if ( ! customify_is_e_theme_location( 'archive' ) ) {
-				customify_blog_posts_heading();
-				customify_blog_posts();
-			}
-		} else {
-			if ( ! customify_is_e_theme_location( 'single' ) ) {
-				get_template_part( 'template-parts/404' );
-			}
-		}
-		do_action( 'customify/content/after' );
-		?>
-	</div><!-- #.content-inner -->
+get_header(); echo "</main>";?>
+	<div class="py-container">
+		<div class="woocommerce">
+			<?php  
+				$args = array(
+					'post_type'      => 'product',
+					'posts_per_page' => 8,
+					'tax_query' => array(
+						array(
+							'taxonomy' => 'product_visibility',
+							'terms' => 'featured',
+							'field' => 'name',
+							'operator' => 'IN',
+							'include_children' => false
+						)
+					)
+				);
+
+				$loop = new WP_Query( $args );
+				// echo "<pre>";
+				// var_dump($loop);
+				echo "<div class='img'><ul class='vv'>";
+				while ( $loop->have_posts() ) : $loop->the_post();
+					global $product;
+					
+					echo wc_get_product();
+				endwhile;
+				echo "</ul></div>";
+				wp_reset_query();
+			?>
+		</div>
+	</div>
 <?php
+echo "<main>";
 get_footer();
+?>
+<script>
+var app = new Vue({
+	el: '#app',
+	data: {
+	  message: 'Hello Vue!'
+	}
+  })
+</script>

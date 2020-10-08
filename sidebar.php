@@ -12,7 +12,7 @@ if ( ! is_active_sidebar( $sidebar_id ) ) {
 	return;
 }
 ?>
-<aside id="sidebar-primary" <?php customify_sidebar_primary_class(); ?>>
+<!-- <aside id="sidebar-primary" <?php customify_sidebar_primary_class(); ?>>
 	<div class="sidebar-primary-inner sidebar-inner widget-area">
 		<?php
 		do_action( 'customify/sidebar-primary/before' );
@@ -20,4 +20,4 @@ if ( ! is_active_sidebar( $sidebar_id ) ) {
 		do_action( 'customify/sidebar-primary/after' );
 		?>
 	</div>
-</aside><!-- #sidebar-primary -->
+</aside>#sidebar-primary -->
