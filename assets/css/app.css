@@ -3254,7 +3254,6 @@ ul.uk-nav-sub {
 	animation-duration:.2s
 }
 .uk-offcanvas {
-	display:none;
 	position:fixed;
 	top:0;
 	bottom:0;

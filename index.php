@@ -18,7 +18,9 @@
 			};
 	</script>
 
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <!-- import Vue before Element -->
+  <script src="<?php echo get_template_directory_uri();?>/assets/js/vue.js"></script>
+
 </head>
 <body class="home blog theme-papaya-shopper woocommerce-no-js py- py-n01">
 	<header class="py-header" >
@@ -221,7 +223,7 @@
 						<li class="py-header-cart">
 							<a class="cart-customlocation" href="#py-mini-cart"uk-toggle>
 							<i class="pyf pyf-gouwuche"></i>
-							<span class="uk-badge">
+							<span class="uk-badge" @click="drawer = true">
 							<?php echo count(WC()->cart->get_cart());?>
 							</span>
 							</a>
@@ -284,7 +286,8 @@
 		<div class="py-container">
 			<div class="woocommerce">
 				<div class="woocommerce columns-4 ">
-					<ol class="py-products uk-child-width-1-2 uk-grid-small uk-child-width-1-4@m uk-grid" uk-grid>
+					<ol id="sajha" class="py-products uk-child-width-1-2 uk-grid-small uk-child-width-1-4@m uk-grid" uk-grid>
+
 						<?php
 							$args = array(
 								// 用于查询的参数或者参数集合
@@ -308,12 +311,14 @@
 								// 通过查询的结果，开始主循环
 								while ( $the_query->have_posts() ) :
 									$the_query->the_post(); //获取到特定的文章
-									echo '<li class="py-product product type-product post-3825 status-publish instock product_cat-beauty has-post-thumbnail taxable shipping-taxable purchasable product-type-variable">';
+									echo '<li class="py-product product type-product post-'.get_the_ID().' status-publish instock product_cat-beauty has-post-thumbnail taxable shipping-taxable purchasable product-type-variable">';
 									echo '<div class="py-thumbnail uk-inline-clip uk-transition-toggle" tabindex="0">';
 									echo '<a class="py-img" href="'.get_permalink().'">';
 									echo woocommerce_show_product_loop_sale_flash();
 									echo woocommerce_get_product_thumbnail().get_the_title().'</a>';
-									echo '<div class="uk-transition-slide-bottom uk-position-bottom uk-overlay uk-overlay-default uk-padding-remove"><p class="py-thumbnail-btn uk-margin-remove uk-flex "><a class="uk-button uk-button-primary" href="'.get_permalink().'" data-product_id="'.get_the_ID().'"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">快速浏览</font></font></a></p></div></div>';
+									$order = array(get_the_ID(),get_permalink());
+
+									echo '<div class="uk-transition-slide-bottom uk-position-bottom uk-overlay uk-overlay-default uk-padding-remove"><p class="py-thumbnail-btn uk-margin-remove uk-flex "><a id="app'.get_the_ID().'" class="uk-button uk-button-primary" v-on:click="greet('.$order.')"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">快速浏览</font></font></a></p></div></div>';
 									echo '<a class="py-img" href="'.get_permalink().'"><h2 class="woocommerce-loop-product__title">'.get_the_title().'</h2></a>';
 									// 要输出的内容，如标题、日期等 
 									add_filter( 'woocommerce_variation_option_name', 'display_price_in_variation_option_name' );
@@ -329,6 +334,7 @@
 							// 重置请求数据
 							wp_reset_postdata(); 
 						?>
+
 					</ol>
 				</div>        
 			</div>
@@ -538,7 +544,6 @@ var wc_currency_converter_params = {"current_currency":"USD","currencies":"{\"AE
 	</div>
 </div>
 	
-	
 <div id="py-mini-cart" uk-offcanvas="flip: true; overlay: true;">
 	<div class="uk-offcanvas-bar">
 		<div class="widget_shopping_cart_content ">
@@ -625,9 +630,9 @@ var wc_currency_converter_params = {"current_currency":"USD","currencies":"{\"AE
 		</div>
 	</div>
 </div>
-<div id="app">
-  {{ message }}
-</div>
+
+<div id="google_translate_element"></div>
+
 <script type='text/javascript'>
 /* <![CDATA[ */
 var woocommerce_params = {"ajax_url":"\/wp-admin\/admin-ajax.php","wc_ajax_url":"\/?wc-ajax=%%endpoint%%","qty_pm":"1"};
@@ -640,10 +645,59 @@ var Customify_JS = {"is_rtl":"","css_media_queries":{"all":"%s","desktop":"%s","
 </script>
 <script type='text/javascript' src='http://www.wdp01.com/wp-content/themes/wordpress-zt/assets/js/compatibility/woocommerce.min.js?ver=0.3.5'></script>
 
+<div id="app">
+  <!-- <button v-on:click="counter += 1">增加 1</button>
+  <p>这个按钮被点击了 {{ counter }} 次。</p> -->
+</div>
+
+
+<div id="py-quick-view-modal" class="uk-flex-top" uk-modal="bg-close:false">
+    <div class="uk-modal-dialog  uk-margin-auto-vertical">
+        <button class="uk-modal-close-default" type="button" uk-close></button>
+        <div class="uk-modal-body">
+            <div id="py-quick-view-content" class="woocommerce py-quick-view-single-product"> </div>
+            <div id="py-quick-view-loading" class="woocommerce py-quick-view-single-product __null">
+                <div class="product uk-grid">
+                    <div class="py-product-gallery uk-width-1-1 uk-width-1-2@m">
+                        <div class="img"></div>
+                    </div>
+                    <div class="uk-width-1-1 uk-width-1-2@m">
+                        <h1 class="product-title product_title entry-title"></h1>
+                        <p class="price"></p>
+                        <button class="uk-button"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="uk-modal-footer uk-text-center">
+            <a id="py-quick-view-details" class="uk-link-muted" href="javascript:;">VIEW FULL DETAILS</a>
+        </div>
+    </div>
+</div>
+
+
+
 </body>
 </html>
-<script>
-console.log(<?php var_dump(WC()->cart->get_cart());?>);
 
+ <script>
+var py = new Vue({
+  el: '#py-quick-view-modal',
+  data: {
+    counter: '00'
+  }
+})
+var sajha = new Vue({
+  el: '#sajha',
+  methods:{
+    greet: function (ev) {
+		// var obj=document.getElementById("py-quick-view-modal");
+		// obj.className="uk-flex-top uk-modal uk-flex uk-open";//相当于在div添加class属性 仅class例外
+		this.counter = ev
+		// py.counter = ev;
+		console.log(ev);
+    }
+  }
+})
 </script>
 
