@@ -22,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 ?>
-<p class="woocommerce-result-count text-uppercase text-xsmall">
+<p class="woocommerce-result-count text-uppercase text-xsmall" style="font-size:1.2rem;">
 	<?php
 
 	if ( 1 === $total ) {
