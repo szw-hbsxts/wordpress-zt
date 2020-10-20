@@ -277,6 +277,7 @@ do_action( 'customify/site-end/after' );
 
 <?php wp_footer(); ?>
 
+
 <link rel="stylesheet" href="<?php echo get_template_directory_uri().'/assets/css/photoswipe.css';?>">
 <link rel="stylesheet" href="<?php echo home_url();?>/wp-content/plugins/woocommerce/assets/css/photoswipe/default-skin/default-skin.css">
 

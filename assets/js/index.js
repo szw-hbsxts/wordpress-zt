@@ -97,6 +97,28 @@ $(document).on("click",".flex-control-thumbs li",function(){
 	//$('.flex-viewport').css('height','auto');
 })
 
+$(document).on("click",".pswp__button--close",function(){
+	//alert("关闭");
+	//var num = $(this).index();
+	$('.pswp--supports-fs').css('display','none');
+	$('.pswp__img').css('display','none');
+	
+})
+$(document).on("click",".woocommerce-product-gallery__trigger",function(){
+	//alert("关闭");
+	//var num = $(this).index();
+	$('.pswp--supports-fs').css('display','block');
+	$('.pswp__img').css('display','block');
+
+})
+$(document).on("click",".pswp__container",function(){
+	//alert("关闭");
+	//var num = $(this).index();
+	$('.pswp--supports-fs').css('display','none');
+	$('.pswp__img').css('display','none');
+	
+})
+
 
 $(document).ready(function(){  
 	//alert("测试");   加载自动执行
