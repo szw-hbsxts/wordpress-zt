@@ -1,11 +1,13 @@
+
 <!doctype html>
 <html <?php language_attributes(); ?>>
 <head>
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=10.0, user-scalable=yes">
 	<link rel="profile" href="http://gmpg.org/xfn/11">
-	<?php wp_head(); ?>
+	<?php wp_head();add_filter('show_admin_bar', '__return_false'); ?>
 	<link rel='stylesheet' id='papaya-shopper-css'  href="<?php echo get_template_directory_uri().'/assets/css/app.css';?>" type='text/css' media='all' />
+	<link rel='stylesheet' href="<?php echo get_template_directory_uri().'/assets/css/index.css';?>" type='text/css' media='all' />
 	<script>
 		var papaya = {
 			"ajax_url":"\/wp-admin\/admin-ajax.php",
@@ -17,9 +19,11 @@
 			"is_add_cart_shake":true
 			};
 	</script>
-
   <!-- import Vue before Element -->
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/1.12.4/jquery.js"></script>
   <script src="<?php echo get_template_directory_uri();?>/assets/js/vue.js"></script>
+  <script src="<?php echo get_template_directory_uri();?>/assets/js/index.js"></script>
+
 
 </head>
 <body class="home blog theme-papaya-shopper woocommerce-no-js py- py-n01">
@@ -46,7 +50,7 @@
 				<div class="py-icon-nav">
 					<ul class="uk-iconnav">
 						<li>
-							<a href="https://funpinpin.com/housebeauty/my-account/">
+							<a href="<?php echo home_url();?>/index.php/my-account/">
 								<i class="pyf pyf-yonghu"></i>
 							</a>
 						</li>
@@ -223,8 +227,8 @@
 						<li class="py-header-cart">
 							<a class="cart-customlocation" href="#py-mini-cart"uk-toggle>
 							<i class="pyf pyf-gouwuche"></i>
-							<span class="uk-badge" @click="drawer = true">
-							<?php echo count(WC()->cart->get_cart());?>
+							<span id="uk-badge" class="uk-badge">
+								{{ message }}
 							</span>
 							</a>
 						</li>
@@ -316,17 +320,17 @@
 									echo '<a class="py-img" href="'.get_permalink().'">';
 									echo woocommerce_show_product_loop_sale_flash();
 									echo woocommerce_get_product_thumbnail().get_the_title().'</a>';
-									$order = array(get_the_ID(),get_permalink());
-
+									$order = get_the_ID();
+									
 									echo '<div class="uk-transition-slide-bottom uk-position-bottom uk-overlay uk-overlay-default uk-padding-remove"><p class="py-thumbnail-btn uk-margin-remove uk-flex "><a id="app'.get_the_ID().'" class="uk-button uk-button-primary" v-on:click="greet('.$order.')"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">快速浏览</font></font></a></p></div></div>';
 									echo '<a class="py-img" href="'.get_permalink().'"><h2 class="woocommerce-loop-product__title">'.get_the_title().'</h2></a>';
-									// 要输出的内容，如标题、日期等 
-									add_filter( 'woocommerce_variation_option_name', 'display_price_in_variation_option_name' );
+									// // 要输出的内容，如标题、日期等 
+									// add_filter( 'woocommerce_variation_option_name', 'display_price_in_variation_option_name' );
 
 									echo '<div class="py-toggle"><div><span class="price">';
 									echo get_product(get_the_ID())->get_price_html();
 									echo '</span><div class="link">
-									<a href="'.get_permalink().'" data-quantity="1" class="product_type_variable add_to_cart_button uk-link" data-product_id="'.get_the_ID().'" data-product_sku="'.get_product(get_the_ID())->get_sku().'" aria-label="Select options for “'.get_the_title().'”" rel="nofollow">Select options</a></div></div></div></li>';
+									<a class="product_type_variable add_to_cart_button uk-link"  v-on:click="greet('.$order.')">Select options</a></div></div></div></li>';
 							 
 								endwhile;
 							endif;
@@ -433,7 +437,7 @@
 						<div>
 							<ul class="uk-iconnav">
 								<li>
-									<a href="mailto:housebeauty@funpinpin.com" class="pyf pyf-youxiang" uk-tooltip="title: our email; pos: bottom" target="_blank"></a>
+									<a href="#" class="pyf pyf-youxiang" uk-tooltip="title: our email; pos: bottom" target="_blank"></a>
 								</li>
 								<li>
 									<a href="#" class="pyf pyf-facebook-box-fill" uk-tooltip="title: Follow Us; pos: bottom" target="_blank"></a></li><li><a href="" class="pyf " uk-tooltip="title: ; pos: bottom" target="_blank"></a>
@@ -506,6 +510,179 @@
 </noscript>
 
 
+
+<div id="py-nav-mobile" uk-offcanvas="overlay: true;flip: true">
+	<div class="uk-offcanvas-bar uk-flex uk-flex-column uk-flex-center">
+		<div class="menu-header_menu-container">
+			<ul id="nav-top-mobile" class="uk-nav uk-nav-primary uk-nav-center uk-margin-auto-vertical">
+				<li><a href="<?php echo home_url();?>/index.php/shop/">All Products</a></li>
+				<li><a href="<?php echo home_url();?>/index.php/contact-us/">Contact Us</a></li>
+				<li><a href="<?php echo home_url();?>/index.php/my-account/">my account</a></li>
+				<li><a href="<?php echo home_url();?>/index.php/cart/">Cart</a></li>
+			</ul>
+		</div>		
+	</div>
+</div>
+	
+<div id="py-mini-cart" uk-offcanvas="flip: true; overlay: true;">
+	<div class="uk-offcanvas-bar">
+		<div class="widget_shopping_cart_content">
+
+		</div>
+	</div>
+</div>
+
+<div id="google_translate_element"></div>
+
+
+<!-- <script type='text/javascript' src='http://www.wdp01.com/wp-content/plugins/woocommerce/assets/js/frontend/single-product.js'></script> -->
+
+
+
+
+
+<div id="butt_vue">
+
+<?php
+$args = array(
+	// 用于查询的参数或者参数集合
+	'post_type'=>'product',
+	'posts_per_page' => 8,
+	'tax_query' => array(
+		array(
+			'taxonomy' => 'product_visibility',
+			'terms' => 'featured',
+			'field' => 'name',
+			'operator' => 'IN',
+			'include_children' => false
+		)
+	)
+); 
+ 
+// 自定义查询
+$the_query = new WP_Query( $args );
+// 判断查询的结果，检查是否有文章
+if ( $the_query->have_posts() ) :
+	// 通过查询的结果，开始主循环
+	while ( $the_query->have_posts() ) :
+		$the_query->the_post(); //获取到特定的文章
+		echo '<div id="app_'.get_the_ID().'" class="uk-flex-top" uk-modal="bg-close:false">';
+		echo '<div class="uk-modal-dialog  uk-margin-auto-vertical">';
+		echo '<button class="uk-modal-close-default" type="button" uk-close></button>';
+		echo '<div class="uk-modal-body">';
+		echo '<div id="py-quick-view-content" class="woocommerce py-quick-view-single-product">';
+		echo '<div class="product content-inner">';
+		echo '<div id="product-'.get_the_ID().'" class="nav-in-title product type-product post-'.get_the_ID().' status-publish first instock product_cat-tshirts has-post-thumbnail shipping-taxable purchasable product-type-simple">';
+		echo '<div class="customify-grid wc-layout-columns"> ';
+
+
+		echo '<div class="media-product-media customify-col-6_md-6_sm-12_xs-12" >';
+
+		echo woocommerce_show_product_images();
+		
+		
+		echo '</div><div class="summary entry-summary  customify-col-6_md-6_sm-12_xs-12">';
+
+		echo '<a class="py-img" href="'.get_permalink().'"><h2 class="woocommerce-loop-product__title">'.get_the_title().'</h2></a>';
+
+		
+		// Meta data.
+		// echo wc_get_formatted_cart_item_data( $the_query ); // PHPCS: XSS ok.
+		
+		// echo woocommerce_template_single_meta();
+
+
+
+
+		echo '<div class="py-toggle"><div><span class="price">';
+
+		echo woocommerce_template_single_price();
+
+		echo '</span></div></div>';
+
+		echo wc_get_stock_html( $the_query );
+
+		echo woocommerce_template_single_sharing();
+
+		echo woocommerce_template_single_excerpt();
+		
+		// echo woocommerce_quantity_input();
+
+
+		// echo '<a href="?add-to-cart='.get_the_ID().'" data-quantity="1" class="button product_type_simple add_to_cart_button ajax_add_to_cart" data-product_id="'.get_the_ID().'" data-product_sku="woo-hoodie-with-zipper" aria-label="添加“'.get_the_title().'” 到您的购物车" rel="nofollow"><span class="button-label">加入购物车</span></a>';
+
+		// echo woocommerce_single_variation_add_to_cart_button();
+		
+		echo woocommerce_template_single_add_to_cart();
+
+		//echo woocommerce_simple_add_to_cart();   //有货显示无货不显示
+
+		// echo woocommerce_product_description_tab(); 描述
+
+		
+		echo '</div></div></div></div>';
+		echo '<div id="py-quick-view-loading" class="woocommerce py-quick-view-single-product __null"><div class="product uk-grid"><div class="py-product-gallery uk-width-1-1 uk-width-1-2@m"><div class="img"></div></div><div class="uk-width-1-1 uk-width-1-2@m"><h1 class="product-title product_title entry-title"></h1><p class="price"></p><button class="uk-button"></button></div></div></div>';
+		echo '</div>';
+		echo '<div class="uk-modal-footer uk-text-center"><a id="py-quick-view-details" class="uk-link-muted" href="'.get_permalink().'">VIEW FULL DETAILS</a></div>';
+		echo '</div></div></div>';
+	endwhile;
+endif;
+ 
+// 重置请求数据
+wp_reset_postdata(); 
+
+
+?>
+</div>
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="pswp__bg"></div>
+	<div class="pswp__scroll-wrap">
+		<div class="pswp__container">
+			<div class="pswp__item"></div>
+			<div class="pswp__item"></div>
+			<div class="pswp__item"></div>
+		</div>
+		<div class="pswp__ui pswp__ui--hidden">
+			<div class="pswp__top-bar">
+				<div class="pswp__counter"></div>
+				<button class="pswp__button pswp__button--close" aria-label="关闭(Esc)"></button>
+				<button class="pswp__button pswp__button--share" aria-label="分享"></button>
+				<button class="pswp__button pswp__button--fs" aria-label="切换全屏模式"></button>
+				<button class="pswp__button pswp__button--zoom" aria-label="缩放"></button>
+				<div class="pswp__preloader">
+					<div class="pswp__preloader__icn">
+						<div class="pswp__preloader__cut">
+							<div class="pswp__preloader__donut"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+				<div class="pswp__share-tooltip"></div>
+			</div>
+			<button class="pswp__button pswp__button--arrow--left" aria-label="前一个 (向左的箭头)"></button>
+			<button class="pswp__button pswp__button--arrow--right" aria-label="后一个 (向右的箭头)"></button>
+			<div class="pswp__caption">
+				<div class="pswp__caption__center"></div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+		var c = document.body.className;
+		c = c.replace(/woocommerce-no-js/, 'woocommerce-js');
+		document.body.className = c;
+</script>
+
+<?php wp_footer(); ?>
+
+
+
+
 <!-- <php add_filter('show_admin_bar', '__return_false');?>
 	
 <php wp_footer(); ?> -->
@@ -531,173 +708,65 @@ var wc_currency_converter_params = {"current_currency":"USD","currencies":"{\"AE
 <script type='text/javascript' src='<?php echo get_template_directory_uri();?>/assets/js/app.js'></script>
 
 
-<div id="py-nav-mobile" uk-offcanvas="overlay: true;flip: true">
-	<div class="uk-offcanvas-bar uk-flex uk-flex-column uk-flex-center">
-		<div class="menu-header_menu-container">
-			<ul id="nav-top-mobile" class="uk-nav uk-nav-primary uk-nav-center uk-margin-auto-vertical">
-				<li><a href="<?php echo home_url();?>/index.php/shop/">All Products</a></li>
-				<li><a href="<?php echo home_url();?>/index.php/contact-us/">Contact Us</a></li>
-				<li><a href="<?php echo home_url();?>/index.php/my-account/">my account</a></li>
-				<li><a href="<?php echo home_url();?>/index.php/cart/">Cart</a></li>
-			</ul>
-		</div>		
-	</div>
-</div>
-	
-<div id="py-mini-cart" uk-offcanvas="flip: true; overlay: true;">
-	<div class="uk-offcanvas-bar">
-		<div class="widget_shopping_cart_content ">
-		<?php 
-
-			if(count(WC()->cart->get_cart()) == 0){
-				echo "<p class='woocommerce-mini-cart__empty-message'>No products in the cart.</p>";
-			}else{
-		
-		?>
-		<form class="woocommerce-cart-form" action="<?php echo esc_url( wc_get_cart_url() ); ?>" method="post">
-			<ul class="woocommerce-mini-cart cart_list product_list_widget">
-				<?php
-				foreach ( WC()->cart->get_cart() as $cart_item_key => $cart_item ) {
-					
-
-					$_product   = apply_filters( 'woocommerce_cart_item_product', $cart_item['data'], $cart_item, $cart_item_key );
-
-					$product_id = apply_filters( 'woocommerce_cart_item_product_id', $cart_item['product_id'], $cart_item, $cart_item_key );
-
-					if ( $_product && $_product->exists() && $cart_item['quantity'] > 0 && apply_filters( 'woocommerce_cart_item_visible', true, $cart_item, $cart_item_key ) ) {
-						$product_permalink = apply_filters( 'woocommerce_cart_item_permalink', $_product->is_visible() ? $_product->get_permalink( $cart_item ) : '', $cart_item, $cart_item_key );
-						?>
-						<li class="woocommerce-mini-cart-item mini_cart_item">
-								<a href="<?php echo  esc_url( $product_permalink );?>">
-								<?php
-								$thumbnail = apply_filters( 'woocommerce_cart_item_thumbnail', $_product->get_image(), $cart_item, $cart_item_key );
-								echo $thumbnail;
-								?>
-								<?php echo  $_product->get_name();?>
-								</a>
-								<?php
-
-
-								// Meta data.
-								echo wc_get_formatted_cart_item_data( $cart_item ); // PHPCS: XSS ok.
-
-								?>
-
-								<?php
-								echo apply_filters( 'woocommerce_cart_item_price', WC()->cart->get_product_price( $_product ), $cart_item, $cart_item_key ); // PHPCS: XSS ok.
-								?>
-
-						<?php
-						if ( $_product->is_sold_individually() ) {
-							$product_quantity = sprintf( '1 <input type="hidden" name="cart[%s][qty]" value="1" />', $cart_item_key );
-						} else {
-							$product_quantity = woocommerce_quantity_input(
-								array(
-									'input_name'   => "cart[{$cart_item_key}][qty]",
-									'input_value'  => $cart_item['quantity'],
-									'max_value'    => $_product->get_max_purchase_quantity(),
-									'min_value'    => '0',
-									'product_name' => $_product->get_name(),
-								),
-								$_product,
-								false
-							);
-						}
-
-						echo apply_filters( 'woocommerce_cart_item_quantity', $product_quantity, $cart_item_key, $cart_item ); // PHPCS: XSS ok.
-						?>
-						
-							</li>
-						<?php
-					}
-				}
-				?>
-			<?php do_action( 'woocommerce_after_cart_table' ); ?>
-			</ul>
-		</form>
-			<div class="cart-collaterals">
-				<?php
-				/**
-				 * Cart collaterals hook.
-				 *
-				 * @hooked woocommerce_cross_sell_display
-				 * @hooked woocommerce_cart_totals - 10
-				 */
-				do_action( 'woocommerce_cart_collaterals' );
-				?>
-			</div>
-		<?php } ?>
-		</div>
-	</div>
-</div>
-
-<div id="google_translate_element"></div>
+<script type='text/javascript' src='http://www.wdp01.com/wp-includes/js/comment-reply.min.js?ver=5.4.2'></script>
+<script type='text/javascript' src='http://www.wdp01.com/wp-content/plugins/woocommerce/assets/js/zoom/jquery.zoom.min.js?ver=1.7.21'></script>
+<script type='text/javascript' src='http://www.wdp01.com/wp-content/plugins/woocommerce/assets/js/flexslider/jquery.flexslider.min.js?ver=2.7.2'></script>
+<script type='text/javascript' src='http://www.wdp01.com/wp-content/plugins/woocommerce/assets/js/photoswipe/photoswipe.min.js?ver=4.1.1'></script>
+<script type='text/javascript' src='http://www.wdp01.com/wp-content/plugins/woocommerce/assets/js/photoswipe/photoswipe-ui-default.min.js?ver=4.1.1'></script>
 
 <script type='text/javascript'>
 /* <![CDATA[ */
-var woocommerce_params = {"ajax_url":"\/wp-admin\/admin-ajax.php","wc_ajax_url":"\/?wc-ajax=%%endpoint%%","qty_pm":"1"};
+var wc_single_product_params = {"i18n_required_rating_text":"\u8bf7\u9009\u62e9\u8bc4\u5206","review_rating_required":"yes","flexslider":{"rtl":false,"animation":"slide","smoothHeight":true,"directionNav":false,"controlNav":"thumbnails","slideshow":false,"animationSpeed":500,"animationLoop":false,"allowOneSlide":false},"zoom_enabled":"1","zoom_options":[],"photoswipe_enabled":"1","photoswipe_options":{"shareEl":false,"closeOnScroll":false,"history":false,"hideAnimationDuration":0,"showAnimationDuration":0},"flexslider_enabled":"1"};
 /* ]]> */
 </script>
-<script type='text/javascript'>
-/* <![CDATA[ */
-var Customify_JS = {"is_rtl":"","css_media_queries":{"all":"%s","desktop":"%s","tablet":"@media screen and (max-width: 1024px) { %s }","mobile":"@media screen and (max-width: 568px) { %s }"},"sidebar_menu_no_duplicator":"1","wc_open_cart":""};
-/* ]]> */
-</script>
-<script type='text/javascript' src='http://www.wdp01.com/wp-content/themes/wordpress-zt/assets/js/compatibility/woocommerce.min.js?ver=0.3.5'></script>
-
-<div id="app">
-  <!-- <button v-on:click="counter += 1">增加 1</button>
-  <p>这个按钮被点击了 {{ counter }} 次。</p> -->
-</div>
-
-
-<div id="py-quick-view-modal" class="uk-flex-top" uk-modal="bg-close:false">
-    <div class="uk-modal-dialog  uk-margin-auto-vertical">
-        <button class="uk-modal-close-default" type="button" uk-close></button>
-        <div class="uk-modal-body">
-            <div id="py-quick-view-content" class="woocommerce py-quick-view-single-product"> </div>
-            <div id="py-quick-view-loading" class="woocommerce py-quick-view-single-product __null">
-                <div class="product uk-grid">
-                    <div class="py-product-gallery uk-width-1-1 uk-width-1-2@m">
-                        <div class="img"></div>
-                    </div>
-                    <div class="uk-width-1-1 uk-width-1-2@m">
-                        <h1 class="product-title product_title entry-title"></h1>
-                        <p class="price"></p>
-                        <button class="uk-button"></button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="uk-modal-footer uk-text-center">
-            <a id="py-quick-view-details" class="uk-link-muted" href="javascript:;">VIEW FULL DETAILS</a>
-        </div>
-    </div>
-</div>
+<script type='text/javascript' src='http://www.wdp01.com/wp-content/plugins/woocommerce/assets/js/frontend/single-product.min.js'></script>
 
 
 
 </body>
 </html>
-
- <script>
+<script>
 var py = new Vue({
-  el: '#py-quick-view-modal',
+  el: '#uk-badge',
   data: {
-    counter: '00'
+    message: <?php echo count(WC()->cart->get_cart());?>
   }
 })
-var sajha = new Vue({
-  el: '#sajha',
+
+new Vue({
+  el: '#mini_cart_sff',
   methods:{
-    greet: function (ev) {
-		// var obj=document.getElementById("py-quick-view-modal");
-		// obj.className="uk-flex-top uk-modal uk-flex uk-open";//相当于在div添加class属性 仅class例外
-		this.counter = ev
-		// py.counter = ev;
-		console.log(ev);
+    mini_cart: function (ev) {
+		py.message = py.message - 1;
+		alert("测试");
     }
   }
 })
-</script>
 
+new Vue({
+  el: '#sajha',
+  methods:{
+    greet: function (ev) {
+		var i = 'app_'+String(ev);
+		var ii = 'app'
+		var obj = document.getElementById(i);
+		alert("Click OK to enter while loading!");
+		obj.className="uk-flex-top uk-modal uk-flex uk-open";//相当于在div添加class属性 仅class例外
+    }
+  }
+})
+
+
+new Vue({
+  el: '#butt_vue',
+  methods:{
+    geng: function (ev) {
+		py.message += 1;
+		var uu = 'product-'+ev;
+		window.open("http://www.wdp01.com/?add-to-cart="+ev).close();
+    }
+
+  }
+})
+
+</script>

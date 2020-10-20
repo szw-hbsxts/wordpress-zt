@@ -83,7 +83,7 @@ jQuery(document).ready(function($) {
 			if (!check) {
 				input.data("qty-added", 1);
 
-				input.wrap('<span class="input-qty-pm"></span>');
+				input.wrap('<span class="input-qty-pm ceds"></span>');
 				var p = input.parent();
 				input.attr("type", "text"); // remove up/ down arrow default
 				p.append(

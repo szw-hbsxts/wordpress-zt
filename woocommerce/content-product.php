@@ -15,6 +15,7 @@ global $product;
 if ( empty( $product ) || ! $product->is_visible() ) {
 	return;
 }
+//echo '<script>diaoyong('.get_the_ID().')</script>';
 ?>
 <li
 <?php
@@ -23,6 +24,7 @@ if ( function_exists( 'wc_product_class' ) ) {
 } else {
 	echo 'class="product customify-col"';
 };
+
 ?>
 >
 	<div class="wc-product-inner">
@@ -38,3 +40,9 @@ if ( function_exists( 'wc_product_class' ) ) {
 	?>
 	</div>
 </li>
+
+<?php
+trgj(get_the_ID());
+
+?>
+

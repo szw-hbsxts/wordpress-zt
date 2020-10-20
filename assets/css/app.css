@@ -1148,7 +1148,7 @@ select.uk-form-width-xsmall {
 .uk-button-primary,.py-footer .wpcf7-form .wpcf7-submit,.woocommerce #respond input#submit.alt,.woocommerce a.button.alt,.woocommerce button.button.alt,.woocommerce input.button.alt,.widget_shopping_cart_content .woocommerce-mini-cart__buttons .checkout {
 	background-color:#222;
 	color:#fff;
-	background-color:var(--py-primary);
+	background-color:#ff6d24;
 	transition:background-color 0.3s
 }
 .uk-button-primary:hover,.py-footer .wpcf7-form .wpcf7-submit:hover,.woocommerce #respond input#submit.alt:hover,.woocommerce a.button.alt:hover,.woocommerce button.button.alt:hover,.woocommerce input.button.alt:hover,.widget_shopping_cart_content .woocommerce-mini-cart__buttons .checkout:hover,.uk-button-primary:focus,.py-footer .wpcf7-form .wpcf7-submit:focus,.woocommerce #respond input#submit.alt:focus,.woocommerce a.button.alt:focus,.woocommerce button.button.alt:focus,.woocommerce input.button.alt:focus,.widget_shopping_cart_content .woocommerce-mini-cart__buttons .checkout:focus {
@@ -3025,7 +3025,7 @@ ul.uk-nav-sub {
 	position:relative;
 	box-sizing:border-box;
 	margin:0 auto;
-	width:600px;
+	width:800px;
 	max-width:calc(100% - 0.01px) !important;
 	background:#fff;
 	opacity:0;
@@ -3254,6 +3254,7 @@ ul.uk-nav-sub {
 	animation-duration:.2s
 }
 .uk-offcanvas {
+	display:none;
 	position:fixed;
 	top:0;
 	bottom:0;
@@ -7332,8 +7333,6 @@ body {
 	text-transform:uppercase
 }
 .woocommerce a.remove {
-	height:initial;
-	width:initial;
 	line-height:1
 }
 .woocommerce a.remove:hover {
@@ -7448,7 +7447,7 @@ body {
 	box-sizing:border-box
 }
 .woocommerce table.shop_table {
-	min-width:500px;
+	
 	border-radius:0 !important
 }
 .woocommerce .woocommerce-order-details table.shop_table {
@@ -9807,7 +9806,7 @@ body {
 	list-style:none
 }
 .widget_shopping_cart_content ul.product_list_widget>li {
-	min-height:75px;
+	min-height:110px;
 	position:relative;
 	overflow:hidden;
 	padding:0 0 0 75px;
@@ -9859,7 +9858,7 @@ body {
 	font-size:.75rem;
 	text-transform:uppercase;
 	color:#747474 !important;
-	text-align:left
+
 }
 .widget_shopping_cart_content ul.product_list_widget>li a:not(.remove) {
 	display:block;
@@ -9876,8 +9875,8 @@ body {
 	position:absolute;
 	top:0;
 	left:0;
-	width:55px;
-	height:55px;
+	width:65px;
+	height:65px;
 	object-fit:cover;
 	object-position:50% 50%
 }
@@ -9906,6 +9905,7 @@ body {
     border: none;
     background: none;
     color: inherit;
+	height: 1.5rem;
 }
 .widget_shopping_cart_content ul.product_list_widget>li .quantity .input-qty-pm input::-webkit-outer-spin-button,.widget_shopping_cart_content ul.product_list_widget>li .quantity input::-webkit-inner-spin-button {
 	-webkit-appearance:none
@@ -10965,3 +10965,9 @@ body {
 	text-transform:capitalize
 }
 }
+
+
+.mini_cart_hdhnsj{
+	width:100% !important;
+}
+

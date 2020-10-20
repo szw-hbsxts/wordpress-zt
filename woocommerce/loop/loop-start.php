@@ -44,4 +44,5 @@ $class = sprintf( "customify-grid-{$columns}_md-{$columns}_sm-{$tablet}_xs-{$mob
 $class .= ' wc-' . $view . '-view';
 
 ?>
-<ul class="products <?php echo esc_attr( $class ); ?> ">
+<ul class="products <?php echo esc_attr( $class ); ?> uk-child-width-1-2 uk-grid-small uk-child-width-1-4@m" id="sajha">
+

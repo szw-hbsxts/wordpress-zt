@@ -1059,8 +1059,7 @@ template {
 [class~="customify-grid"] > [class*="customify-col-9"],
 [class*="customify-grid-"] > [class*="customify-col-9"],
 [class*="customify-grid_"] > [class*="customify-col-9"] {
-  flex-basis: 75%;
-  max-width: 75%;
+  width: 100%;
 }
 [class~="customify-grid"] > [class*="customify-col-10"],
 [class*="customify-grid-"] > [class*="customify-col-10"],
@@ -5718,13 +5717,13 @@ body.menu_sidebar_dropdown:before {
     padding-right: 1em;
   }
   .content-sidebar.sidebar_vertical_border .content-area {
-    border-right: 1px solid #eaecee;
+    border-right: 0px solid #eaecee;
   }
   .content-sidebar.sidebar_vertical_border .content-inner {
-    padding-right: 1em;
+    padding-right: 0em;
   }
   .content-sidebar.sidebar_vertical_border .sidebar-primary-inner {
-    padding-left: 1em;
+    padding-left: 0em;
   }
 }
 
@@ -5797,8 +5796,8 @@ body.menu_sidebar_dropdown:before {
     padding-right: 1em;
   }
   .sidebar-content-sidebar.sidebar_vertical_border .content-area {
-    border-left: 1px solid #eaecee;
-    border-right: 1px solid #eaecee;
+    border-left: 0px solid #eaecee;
+    border-right: 0px solid #eaecee;
   }
   .sidebar-content-sidebar.sidebar_vertical_border .content-inner {
     padding-left: 1em;

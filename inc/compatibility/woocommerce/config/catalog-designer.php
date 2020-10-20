@@ -417,21 +417,26 @@ class Customify_WC_Catalog_Designer {
 	}
 
 	function product__media() {
-		echo '<div class="wc-product-media">';
+		echo '<div class="wc-product-media py-thumbnail uk-inline-clip uk-transition-toggle">';
 		/**
 		 * Hook: customify/wc-product/before-media
 		 * hooked: woocommerce_template_loop_product_link_open - 10
 		 */
 		do_action( 'customify/wc-product/before-media' );
 		woocommerce_show_product_loop_sale_flash();
-		woocommerce_template_loop_product_thumbnail();
-		customify_wc_secondary_product_thumbnail();
+		echo woocommerce_get_product_thumbnail();
+
+		//woocommerce_template_loop_product_thumbnail();
+		//customify_wc_secondary_product_thumbnail();
 		do_action( 'customify_after_loop_product_media' );
 		/**
 		 * Hook: customify/wc-product/after-media
 		 * hooked: woocommerce_template_loop_product_link_close - 10
 		 */
 		do_action( 'customify/wc-product/after-media' );
+
+	
+		echo '<div class="uk-transition-slide-bottom uk-position-bottom uk-overlay uk-overlay-default uk-padding-remove"><p class="py-thumbnail-btn uk-margin-remove uk-flex "><a class="uk-button uk-button-primary" href="javascript:void(0)" data-product_id="'.get_the_ID().'"   onclick="wogfsh('.get_the_ID().')" style="width: 100%;" id="wisnhju">Quick View</a></p></div>';
 		echo '</div>';
 	}
 

@@ -99,13 +99,13 @@ function customify_customize_render_footer() {
 	 * @since 0.2.2
 	 */
 	do_action( 'customify/before-footer' );
-	echo '<footer class="site-footer" id="site-footer">';
+/* 	echo '<footer class="site-footer" id="site-footer">';
 	Customify_Customize_Layout_Builder_Frontend()->set_id( 'footer' );
 	Customify_Customize_Layout_Builder_Frontend()->set_control_id( 'footer_builder_panel' );
 	$list_items = Customify_Customize_Layout_Builder()->get_builder_items( 'footer' );
 	Customify_Customize_Layout_Builder_Frontend()->set_config_items( $list_items );
 	Customify_Customize_Layout_Builder_Frontend()->render();
-	echo '</footer>';
+	echo '</footer>'; */
 	/**
 	 * Hook before footer
 	 *
