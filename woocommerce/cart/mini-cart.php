@@ -58,12 +58,11 @@
 								?>
 								<div class="quantity">
 									<label class="screen-reader-text" for="quantity_5f8a4639f3e79">Hoodie - Blue, Yes quantity</label>
-								<span class="input-qty-pm ghjags" style="width:100%;">
-								<!--<button type="button" class="input-pm-act input-pm-minus" v-on:click="subtraction()" onclick="subtraction(<?php echo $yt;?>,<?php echo $cart_item['quantity'];?>)">-</button>
-								--->
-								<input type="text" id="<?php echo $yt;?>" class="input-text qty text" step="1" min="0" max="" name="cart[<?php echo $cart_item_key;?>][qty]" value="<?php echo $cart_item['quantity'];?>" title="quantity" size="4" placeholder="" inputmode="numeric" style="width:100%;">
-								<!--<button type="button" class="input-pm-act input-pm-plus" v-on:click="addition()" onclick="addition(<?php echo $yt;?>,<?php echo $cart_item['quantity'];?>)">+</button></span>
-								----></div>
+									<span class="input-qty-pm ghjags" style="width:100%;">
+										<input type="text" id="<?php echo $yt;?>" class="input-text qty text" step="1" min="0" max="" name="cart[<?php echo $cart_item_key;?>][qty]" value="<?php echo $cart_item['quantity'];?>" title="quantity" size="4" placeholder="" inputmode="numeric" style="width:100%;">
+									</span>
+									
+								</div>
 								<?php
 									
 								

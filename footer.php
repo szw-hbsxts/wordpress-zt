@@ -212,7 +212,7 @@ do_action( 'customify/site-end/after' );
 		<div class="menu-header_menu-container">
 			<ul id="nav-top-mobile" class="uk-nav uk-nav-primary uk-nav-center uk-margin-auto-vertical">
 				<li><a href="<?php echo home_url();?>/index.php/shop/">All Products</a></li>
-				<li><a href="<?php echo home_url();?>/index.php/contact-us/">Contact Us</a></li>
+				<li><a href="<?php echo home_url();?>/?page_id=3&preview=true">Contact Us</a></li>
 				<li><a href="<?php echo home_url();?>/index.php/my-account/">my account</a></li>
 				<li><a href="<?php echo home_url();?>/index.php/cart/">Cart</a></li>
 			</ul>
@@ -269,11 +269,6 @@ do_action( 'customify/site-end/after' );
 	</div>
 </div>
 
-<script type="text/javascript">
-		var c = document.body.className;
-		c = c.replace(/woocommerce-no-js/, 'woocommerce-js');
-		document.body.className = c;
-</script>
 
 <?php wp_footer(); ?>
 
@@ -299,19 +294,26 @@ var wc_currency_converter_params = {"current_currency":"USD","currencies":"{\"AE
 <script type='text/javascript' src='<?php echo get_template_directory_uri();?>/assets/js/app.js'></script>
 
 
-<script type='text/javascript' src='http://www.wdp01.com/wp-includes/js/comment-reply.min.js?ver=5.4.2'></script>
-<script type='text/javascript' src='http://www.wdp01.com/wp-content/plugins/woocommerce/assets/js/zoom/jquery.zoom.min.js?ver=1.7.21'></script>
-<script type='text/javascript' src='http://www.wdp01.com/wp-content/plugins/woocommerce/assets/js/flexslider/jquery.flexslider.min.js?ver=2.7.2'></script>
-<script type='text/javascript' src='http://www.wdp01.com/wp-content/plugins/woocommerce/assets/js/photoswipe/photoswipe.min.js?ver=4.1.1'></script>
-<script type='text/javascript' src='http://www.wdp01.com/wp-content/plugins/woocommerce/assets/js/photoswipe/photoswipe-ui-default.min.js?ver=4.1.1'></script>
+<script type='text/javascript' src='<?php echo home_url();?>/wp-includes/js/comment-reply.min.js?ver=5.4.2'></script>
+<script type='text/javascript' src='<?php echo home_url();?>/wp-content/plugins/woocommerce/assets/js/zoom/jquery.zoom.min.js?ver=1.7.21'></script>
+<script type='text/javascript' src='<?php echo home_url();?>/wp-content/plugins/woocommerce/assets/js/flexslider/jquery.flexslider.min.js?ver=2.7.2'></script>
+<script type='text/javascript' src='<?php echo home_url();?>/wp-content/plugins/woocommerce/assets/js/photoswipe/photoswipe.min.js?ver=4.1.1'></script>
+<script type='text/javascript' src='<?php echo home_url();?>/wp-content/plugins/woocommerce/assets/js/photoswipe/photoswipe-ui-default.min.js?ver=4.1.1'></script>
 
 <script type='text/javascript'>
 /* <![CDATA[ */
 var wc_single_product_params = {"i18n_required_rating_text":"\u8bf7\u9009\u62e9\u8bc4\u5206","review_rating_required":"yes","flexslider":{"rtl":false,"animation":"slide","smoothHeight":true,"directionNav":false,"controlNav":"thumbnails","slideshow":false,"animationSpeed":500,"animationLoop":false,"allowOneSlide":false},"zoom_enabled":"1","zoom_options":[],"photoswipe_enabled":"1","photoswipe_options":{"shareEl":false,"closeOnScroll":false,"history":false,"hideAnimationDuration":0,"showAnimationDuration":0},"flexslider_enabled":"1"};
 /* ]]> */
 </script>
-<script type='text/javascript' src='http://www.wdp01.com/wp-content/plugins/woocommerce/assets/js/frontend/single-product.min.js'></script>
 
+
+<?
+if(!is_product()){
+	echo "<script type='text/javascript' src='".home_url()."/wp-content/plugins/woocommerce/assets/js/frontend/single-product.min.js'></script>";
+}
+
+
+?>
 
 
 </body>
@@ -324,40 +326,11 @@ var py = new Vue({
   }
 })
 
-new Vue({
-  el: '#mini_cart_sff',
-  methods:{
-    mini_cart: function (ev) {
-		py.message = py.message - 1;
-		alert("测试");
-    }
-  }
-})
-
-new Vue({
-  el: '#sajha',
-  methods:{
-    greet: function (ev) {
-		var i = 'app_'+String(ev);
-		var ii = 'app'
-		var obj = document.getElementById(i);
-		obj.className="uk-flex-top uk-modal uk-flex uk-open";//相当于在div添加class属性 仅class例外
-    }
-  }
-})
 
 
-new Vue({
-  el: '#butt_vue',
-  methods:{
-    geng: function (ev) {
-		py.message += 1;
-		var uu = 'product-'+ev;
-		window.open("http://www.wdp01.com/?add-to-cart="+ev).close();
-    }
 
-  }
-})
+
+
 
 </script>
 

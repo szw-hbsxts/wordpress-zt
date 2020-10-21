@@ -9,10 +9,7 @@
 
 get_header(); ?>
 	<div class="content-inner">
-		<h1>测试01</h1>
-		<?php
-			bloginfo( 'name' );
-		?>
+
 		<?php
 		do_action( 'customify/content/before' );
 

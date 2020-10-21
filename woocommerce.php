@@ -69,7 +69,7 @@ if ( $the_query->have_posts() ) :
 		echo '<div id="py-quick-view-content" class="woocommerce py-quick-view-single-product">';
 		echo '<div class="product content-inner">';
 		echo '<div id="product-'.get_the_ID().'" class="nav-in-title product type-product post-'.get_the_ID().' status-publish first instock product_cat-tshirts has-post-thumbnail shipping-taxable purchasable product-type-simple">';
-		echo '<div class="customify-grid wc-layout-columns"> ';
+		echo '<div class="customify-grid wc-layout-columns" id="ces"> ';
 
 
 		echo '<div class="media-product-media customify-col-6_md-6_sm-12_xs-12" >';

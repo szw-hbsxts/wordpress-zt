@@ -110,7 +110,6 @@ do_action( 'woocommerce_before_cart' ); ?>
 						}
 
 						echo apply_filters( 'woocommerce_cart_item_quantity', $product_quantity, $cart_item_key, $cart_item ); // PHPCS: XSS ok.
-
 						?>
 					</td>
 
@@ -134,7 +133,7 @@ do_action( 'woocommerce_before_cart' ); ?>
 					<div class="coupon">
 						<label for="coupon_code"><?php esc_html_e( 'Coupon:', 'customify' ); ?></label>
 						<input type="text" name="coupon_code" class="input-text" id="coupon_code" value="" placeholder="<?php esc_attr_e( 'Coupon code', 'customify' ); ?>" />
-						<button type="submit" class="button" name="apply_coupon" value="<?php esc_attr_e( 'Apply coupon', 'customify' ); ?>"><?php esc_attr_e( 'Apply coupon', 'customify' ); ?></button>
+						<button type="submit" class="button" name="apply_coupon" value="<?php esc_attr_e( 'Apply coupon', 'customify' ); ?>" style="width: 2.5rem;height: 2.5rem;"><?php esc_attr_e( 'Apply coupon', 'customify' ); ?></button>
 						<?php do_action( 'woocommerce_cart_coupon' ); ?>
 					</div>
 				<?php } ?>

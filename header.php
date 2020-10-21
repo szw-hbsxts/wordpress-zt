@@ -267,4 +267,23 @@ add_filter('show_admin_bar', '__return_false');
 		<div <?php customify_site_content_container_class(); ?>>
 			<div <?php customify_site_content_grid_class(); ?>>
 				<main id="main" <?php customify_main_content_class(); ?>>
+
+				<!-- <div class="uk-margin-medium-bottom">
+					<h1 id="py-product-0" class="py-title uk-article-title">
+						products        </h1>
+				</div> -->
+				<?php
+					if(is_woocommerce()){
+						if(!is_product()){
+							echo '<div class="uk-margin-medium-bottom">';
+							echo '<h1 id="py-product-0" class="py-title uk-article-title">';
+							if(single_cat_title() == null){
+								echo " All Products";
+							}else{
+								echo single_cat_title();
+							}
+							echo '</h1></div>';
+						}
+					}
+				?>
 					<?php do_action( 'customify/main/before' ); ?>

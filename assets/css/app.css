@@ -7327,7 +7327,7 @@ body {
 	color:#888
 }
 .woocommerce .widget_price_filter .price_slider_amount,.woocommerce ul.cart_list li .reviewer,.woocommerce ul.product_list_widget li .reviewer,.woocommerce .woocommerce-result-count,.woocommerce-error,.woocommerce-info,.woocommerce-message,.woocommerce .woocommerce-review-link,.woocommerce-review__published-date,.woocommerce table.shop_table th,.woocommerce table.shop_table_responsive tr td::before,.woocommerce-page table.shop_table_responsive tr td::before,.header-cart .cart-quantity {
-	font-size:0.625rem;
+	
 	font-weight:400;
 	letter-spacing:0.025em;
 	text-transform:uppercase
@@ -7752,7 +7752,7 @@ body {
 .py-products>li.product .py-toggle {
 	text-align:center;
 	line-height:1rem;
-	height:1.5rem;
+	height:4.5rem;
 	overflow:hidden
 }
 .py-products>li.product .py-toggle>div {
@@ -7769,8 +7769,17 @@ body {
 	color:#747474;
 	font-family:"papaya"
 }
+
+
+
 .py-products>li.product .py-toggle>div .uk-link:hover,.py-products>li.product .py-toggle>div a:hover {
 	color:rgba(0,0,0,0.8)
+}
+.py-products>li.product .py-toggle>div a.ajax_add_to_cart, .py-products>li.product .py-toggle>div a.ajax_add_to_cart span,.py-products>li.product .py-toggle>div a.added_to_cart,.py-products>li.product .py-toggle>div a.product_type_variable{
+	color:#fff;
+}
+.py-products>li.product .py-toggle>div a.ajax_add_to_cart:hover{
+	color:#fff;
 }
 .py-products>li.product .py-toggle>div .uk-link>.uk-spinner,.py-products>li.product .py-toggle>div a>.uk-spinner {
 	display:none
@@ -8166,8 +8175,8 @@ body {
 }
 .woocommerce .coupon .input-text {
 	width:100%;
-	border:2px solid #222;
-	border-color:var(--py-primary)
+	border:1px solid #6d6d6d;
+	border-color:#6d6d6d;
 }
 .woocommerce .coupon .input-text:hover,.woocommerce .coupon .input-text:focus {
 	border-color:#222;
@@ -10693,8 +10702,7 @@ body {
 	margin:0
 }
 .woocommerce div.product form.cart>div,.woocommerce div.product form.cart {
-	width:100%;
-	margin-right:0;
+
 	flex-wrap:wrap
 }
 .woocommerce div.product form.cart>div .button,.woocommerce div.product form.cart .button {
@@ -10971,3 +10979,31 @@ body {
 	width:100% !important;
 }
 
+
+button.single_add_to_cart_button.button.alt {
+    height: 2.6rem;
+	padding:0px !important;
+	margin:0px !important;
+	background-color: #ff6d24;
+	width: 9rem;
+}
+td.woocommerce-grouped-product-list-item__label,td.woocommerce-grouped-product-list-item__price{
+	line-height: 2.5rem;
+}
+
+div.wc-product__part .add_to_cart_button,div.py-toggle .add_to_cart_button,.added_to_cart,#hsjuhu{
+	background-color: #ff6d24 !important;
+}
+
+div.wc-product__part span.price del span.woocommerce-Price-amount{
+	color: #000 !important;
+}
+div.py-toggle span.price del span.woocommerce-Price-amount{
+	color: #000 !important;
+}
+td.woocommerce-grouped-product-list-item__price del span.woocommerce-Price-amount{
+	color: #000 !important;
+}
+div.wc-product__part span.price ins span.woocommerce-Price-amount{
+	color: red !important;
+}
