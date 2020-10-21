@@ -11004,6 +11004,9 @@ div.py-toggle span.price del span.woocommerce-Price-amount{
 td.woocommerce-grouped-product-list-item__price del span.woocommerce-Price-amount{
 	color: #000 !important;
 }
+td.woocommerce-grouped-product-list-item__price del,div.py-toggle span.price del,div.wc-product__part span.price del{
+	color: #000;
+}
 div.wc-product__part span.price ins span.woocommerce-Price-amount{
 	color: red !important;
 }
