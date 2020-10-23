@@ -9818,7 +9818,7 @@ body {
 	min-height:110px;
 	position:relative;
 	overflow:hidden;
-	padding:0 0 0 75px;
+	padding:0 0 0 80px;
 	display:flex;
 	flex-direction:column;
 	justify-content:center;
@@ -11009,4 +11009,22 @@ td.woocommerce-grouped-product-list-item__price del,div.py-toggle span.price del
 }
 div.wc-product__part span.price ins span.woocommerce-Price-amount{
 	color: red !important;
+}
+
+.flex-viewport {
+    height: auto !important;
+}
+.button-label{
+	color:#fff !important;
+}
+td.product-name {
+    width: 40%;
+}
+
+td.product-name a,h2.woocommerce-loop-product__title a {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+	text-align: left;
 }

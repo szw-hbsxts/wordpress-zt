@@ -307,7 +307,7 @@ var wc_single_product_params = {"i18n_required_rating_text":"\u8bf7\u9009\u62e9\
 </script>
 
 
-<?
+<?php
 if(!is_product()){
 	echo "<script type='text/javascript' src='".home_url()."/wp-content/plugins/woocommerce/assets/js/frontend/single-product.min.js'></script>";
 }

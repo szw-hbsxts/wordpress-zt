@@ -23,7 +23,7 @@ if ( $product->is_in_stock() ) : ?>
 
 	<?php do_action( 'woocommerce_before_add_to_cart_form' ); ?>
 
-	<form class="cart"  method="post" enctype='multipart/form-data'>
+	<form class="cart" name="from1"  method="post" enctype='multipart/form-data'>
 		<?php do_action( 'woocommerce_before_add_to_cart_button' ); ?>
 
 		<?php
@@ -40,12 +40,12 @@ if ( $product->is_in_stock() ) : ?>
 		do_action( 'woocommerce_after_add_to_cart_quantity' );
 		?>
 
-		<button type="submit" name="add-to-cart" value="<?php echo esc_attr( $product->get_id() ); ?>" class="single_add_to_cart_button button alt add_to_cart_button ajax_add_to_cart" id="button_vue" v-on:click="geng(<?php echo absint( $product->get_id() ); ?>)">
+		<button type="submit" data-quantity="1" name="add-to-cart" data-product_id="<?php echo esc_attr( $product->get_id() ); ?>" value="<?php echo esc_attr( $product->get_id() ); ?>" class="button product_type_simple add_to_cart_button ajax_add_to_cart" id="button_vue">
 			<span class="button-label">
 				<?php echo esc_html( $product->single_add_to_cart_text() ); ?>
 			</span>
 		</button>
-
+		
 		<?php do_action( 'woocommerce_after_add_to_cart_button' ); ?>
 	</form>
 

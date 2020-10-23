@@ -30,7 +30,7 @@ global $product;
 	do_action( 'woocommerce_after_add_to_cart_quantity' );
 	?>
 
-	<button type="submit" class="single_add_to_cart_button button alt add_to_cart_button ajax_add_to_cart" id="button_vue" v-on:click="geng(<?php echo absint( $product->get_id() ); ?>)">
+	<button type="submit" class="button alt add_to_cart_button ajax_add_to_cart" id="button_vue" data-product_id="<?php echo absint( $product->get_id() ); ?>">
 		<span class="button-label">
 			<?php echo esc_html( $product->single_add_to_cart_text() ); ?>
 		</span>

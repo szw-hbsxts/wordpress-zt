@@ -17,7 +17,7 @@
 						$product_permalink = apply_filters( 'woocommerce_cart_item_permalink', $_product->is_visible() ? $_product->get_permalink( $cart_item ) : '', $cart_item, $cart_item_key );
 						?>
 						<li class="woocommerce-mini-cart-item mini_cart_item" id="ytr_<?php echo $product_id;?>">
-								<a href="<?php echo  esc_url( $product_permalink );?>">
+								<a href="<?php echo  esc_url( $product_permalink );?>" style="display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 2;overflow: hidden;">
 								<?php
 								$thumbnail = apply_filters( 'woocommerce_cart_item_thumbnail', $_product->get_image(), $cart_item, $cart_item_key );
 								echo $thumbnail;

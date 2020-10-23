@@ -330,7 +330,6 @@
 									echo '<div class="py-toggle"><div><span class="price">';
 									echo get_product(get_the_ID())->get_price_html();
 									echo '</span>';
-									echo woocommerce_template_loop_add_to_cart();
 									echo '</div></div></li>';
 							 
 								endwhile;
@@ -424,6 +423,7 @@ if ( $the_query->have_posts() ) :
 		// echo woocommerce_single_variation_add_to_cart_button();
 		
 		echo woocommerce_template_single_add_to_cart();
+
 
 		//echo woocommerce_simple_add_to_cart();   //有货显示无货不显示
 

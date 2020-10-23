@@ -19,6 +19,51 @@ function threeFn(num){
 	alert(shu);
 } */
 
+$(document).on("click",".input-pm-plus",function(){
+
+	var o = $(this).prev().val(); //获取上一个节点值
+	$(this).parent('.input-qty-pm').parent('.quantity').next().attr("data-quantity",o);
+
+})
+
+$(document).on("click",".product_type_simple",function(){
+	
+	alert('ecss001');
+
+})
+
+$(document).on("click","#variations_hgh",function(){
+	
+	alert('ecss002');
+	var hg = $(this).attr("url");
+	alert(hg);
+	//创建xmlHttp对象
+	var xmlHttp;
+	if(window.ActiveXObject){
+		xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	else if(window.XMLHttpRequest){
+		xmlHttp = new XMLHttpRequest();
+	}
+
+	//获取表单值
+	var datastr = "username=ces";
+	var url = hg;
+
+	xmlHttp.onreadystatechange = function(){
+		if(xmlHttp.readyState == 4){
+			alert(xmlHttp.responseText);
+		}
+	}
+
+	//提交数据
+	xmlHttp.open("POST",url,false);
+	xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xmlHttp.send(datastr);
+	document.getElementById("p1").innerHTML = "表单已提交";
+	return false;	//重要!一定要写
+
+})
 
 $(document).on("click","#wisnhju",function(){
 	
@@ -26,14 +71,16 @@ $(document).on("click","#wisnhju",function(){
 
 	var id = $(this).attr('data-product_id');
 	var i = 'app_'+String(id);
-	var ii = 'gfdagsg'
+	var ii = 'gfdagsg';
+
 	var obj = document.getElementById(i);
 	obj.className="uk-flex-top uk-modal uk-flex uk-open";//相当于在div添加class属性 仅class例外
 	obj.style.display='block';
 	obj.style.cssText='width:100%;display:block;';
 	var uy = $('.flex-control-thumbs').children("li").length;
 	$('.flex-viewport').css('height','auto');
-	$('.flex-active-slide').css('width',100/(uy*2)+'%');
+	$('.flex-active-slide').css('width',100/(uy*2)+'%');	
+
 	
 })
 
