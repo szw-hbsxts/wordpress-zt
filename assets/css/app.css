@@ -11028,3 +11028,33 @@ td.product-name a,h2.woocommerce-loop-product__title a {
     overflow: hidden;
 	text-align: left;
 }
+.variations_add_to_cart_button, .grouped_add_to_cart_button, .product_type_simple{
+	position: relative;
+}
+
+
+
+
+#go_globule{
+	transform: translate3d(0,0,0);
+	opacity:0;
+    width: 15px;
+    height: 15px;
+    background: #ff6d24;
+    position: absolute;
+    z-index: 990;
+	left:0;
+	top:0;
+	border-radius:15px;
+}
+.uk-badge {
+	z-index:999;
+}
+.added_to_cart{
+	display:none !important;
+}
+.product_type_simple{
+	background: #ff6d24 !important;
+	font-size: inherit !important;
+}
+

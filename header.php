@@ -239,7 +239,7 @@ add_filter('show_admin_bar', '__return_false');
 							<a class="cart-customlocation" href="#py-mini-cart"uk-toggle>
 							<i class="pyf pyf-gouwuche"></i>
 							<span id="uk-badge" class="uk-badge">
-								{{ message }}
+							<?php echo count(WC()->cart->get_cart());?>
 							</span>
 							</a>
 						</li>

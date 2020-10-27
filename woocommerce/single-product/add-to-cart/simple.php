@@ -44,6 +44,7 @@ if ( $product->is_in_stock() ) : ?>
 			<span class="button-label">
 				<?php echo esc_html( $product->single_add_to_cart_text() ); ?>
 			</span>
+			<span id='go_globule'></span>
 		</button>
 		
 		<?php do_action( 'woocommerce_after_add_to_cart_button' ); ?>

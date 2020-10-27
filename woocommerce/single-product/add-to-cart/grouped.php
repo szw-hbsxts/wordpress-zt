@@ -14,8 +14,8 @@ defined( 'ABSPATH' ) || exit;
 global $product, $post;
 
 //do_action( 'woocommerce_before_add_to_cart_form' ); ?>
-
-<form class="cart grouped_form" action="<?php echo esc_url( apply_filters( 'woocommerce_add_to_cart_form_action', $product->get_permalink() ) ); ?>" method="post" enctype='multipart/form-data'>
+<p id="pl"></p>
+<form id="grouped_form" class="cart grouped_form" url="<?php echo esc_url( apply_filters( 'woocommerce_add_to_cart_form_action', $product->get_permalink() ) ); ?>" method="post" enctype='multipart/form-data'>
 	<table cellspacing="0" class="woocommerce-grouped-product-list group_table">
 		<tbody>
 			<?php
@@ -100,12 +100,15 @@ global $product, $post;
 
 		<?php do_action( 'woocommerce_before_add_to_cart_button' ); ?>
 
-		<button type="submit" class="single_add_to_cart_button button alt">
+		<button type="submit" class="grouped_add_to_cart_button button alt">
 			<span class="button-label">
 				<?php echo esc_html( $product->single_add_to_cart_text() ); ?>
 			</span>
+			<span id='go_globule'>
+			
+			</span>
 		</button>
-
+		
 		<?php do_action( 'woocommerce_after_add_to_cart_button' ); ?>
 
 	<?php endif; ?>

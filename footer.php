@@ -318,20 +318,5 @@ if(!is_product()){
 
 </body>
 </html>
-<script>
-var py = new Vue({
-  el: '#uk-badge',
-  data: {
-    message: <?php echo count(WC()->cart->get_cart());?>
-  }
-})
-
-
-
-
-
-
-
-</script>
 
 

@@ -97,11 +97,15 @@ class Customify_WC_Catalog_Designer {
 						call_user_func( $cb, array( $item, $this ) );
 						$item_html = ob_get_contents();
 						ob_end_clean();
-
+	
+						
+						
 						if ( trim( $item_html ) != '' ) {
-							$html .= '<div class="' . esc_attr( join( ' ', $classes ) ) . '">';
-							$html .= $item_html;
-							$html .= '</div>';
+							if( stristr(esc_attr( join( ' ', $classes ) ),'wc-product__add_to_cart') ==  false){
+								$html .= '<div class="' . esc_attr( join( ' ', $classes ) ) . '">';
+								$html .= $item_html;
+								$html .= '</div>';
+							}
 						}
 					}
 				}

@@ -2,10 +2,8 @@
 /**
  * Single variation cart button
  *
- * @todo Just add more `span.button-label` to button.
- *
  * @see https://docs.woocommerce.com/document/template-structure/
- * @package WooCommerce/Templates
+ * @package WooCommerce\Templates
  * @version 3.4.0
  */
 
@@ -30,10 +28,11 @@ global $product;
 	do_action( 'woocommerce_after_add_to_cart_quantity' );
 	?>
 
-	<button type="submit" class="button alt add_to_cart_button ajax_add_to_cart" id="button_vue" data-product_id="<?php echo absint( $product->get_id() ); ?>">
-		<span class="button-label">
-			<?php echo esc_html( $product->single_add_to_cart_text() ); ?>
-		</span>
+	<button type="submit" class="variations_add_to_cart_button button alt" data-quantity="1">
+	
+	<?php echo esc_html( $product->single_add_to_cart_text() ); ?>
+	
+		<span id='go_globule'></span>
 	</button>
 
 	<?php do_action( 'woocommerce_after_add_to_cart_button' ); ?>
