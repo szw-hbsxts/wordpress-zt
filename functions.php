@@ -101,3 +101,5 @@ function woocommerce_header_add_to_cart_fragment( $fragments ) {
 }
 
 add_filter( 'loop_shop_per_page', create_function( '$cols', 'return 8;' ), 20 );
+
+

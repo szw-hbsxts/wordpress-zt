@@ -11,12 +11,14 @@
 					
 
 					$_product   = apply_filters( 'woocommerce_cart_item_product', $cart_item['data'], $cart_item, $cart_item_key );
+					
+									
 
 					$product_id = apply_filters( 'woocommerce_cart_item_product_id', $cart_item['product_id'], $cart_item, $cart_item_key );
 					if ( $_product && $_product->exists() && $cart_item['quantity'] > 0 && apply_filters( 'woocommerce_cart_item_visible', true, $cart_item, $cart_item_key ) ) {
 						$product_permalink = apply_filters( 'woocommerce_cart_item_permalink', $_product->is_visible() ? $_product->get_permalink( $cart_item ) : '', $cart_item, $cart_item_key );
 						?>
-						<li class="woocommerce-mini-cart-item mini_cart_item" id="ytr_<?php echo $product_id;?>">
+						<li class="woocommerce-mini-cart-item mini_cart_item">
 								<a href="<?php echo  esc_url( $product_permalink );?>" style="display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 2;overflow: hidden;">
 								<?php
 								$thumbnail = apply_filters( 'woocommerce_cart_item_thumbnail', $_product->get_image(), $cart_item, $cart_item_key );
@@ -60,15 +62,12 @@
 									<label class="screen-reader-text" for="<?php echo $yt;?>">Hoodie - Blue, Yes quantity</label>
 									<span class="input-qty-pm ghjags" style="width:100%;">
 										<button type="button" class="input-pm-act input-mini-minus" style="float: left;">-</button>
-										<input type="text" id="<?php echo $yt;?>" class="input-text qty text" step="1" min="0" max="" name="cart[<?php echo $cart_item_key;?>][qty]" value="<?php echo $cart_item['quantity'];?>" title="quantity" size="4" placeholder="" inputmode="numeric" style="float: left;">
+										<input type="text" id="<?php echo $yt;?>" class="input-text qty text" step="1" min="0" max="" post_type="<?php echo $_product->{'post_type'};?>" data_product_id="<?php echo $cart_item['product_id'];?>" data_variation_id="<?php echo $cart_item['variation_id'];?>"  name="cart[<?php echo $cart_item_key;?>][qty]" value="<?php echo $cart_item['quantity'];?>" title="quantity" size="4" placeholder="" inputmode="numeric" style="float: left;">
 										<button type="button" class="input-pm-act input-mini-plus" style="float: left;">+</button>
 									</span>
 									
 								</div>
-								<?php
-									
-								
-								?>
+
 
 
 								<?php

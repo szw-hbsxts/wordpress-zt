@@ -33,21 +33,65 @@ $(document).on("click",".input-pm-minus",function(){
 })
 
 $(document).on("click",".input-mini-plus",function(){
-
+	
 	var o = $(this).prev().val(); //获取上一个节点值
 	
-	$(this).prev().val(o+1);
-	alert(o);
+	$(this).prev().val(parseInt(o)+1);
+	
+	var url = $(this).parent().parent().prev().prev().attr("href");
+	
+	var uyt = $(this).prev().attr("post_type");
+	
+	var id = $(this).prev().attr("data_product_id");
+	
+	if(uyt == 'product_variation'){
+		var f_id = $(this).prev().attr("data_variation_id");
+		ajax_from_ady(url+"&add-to-cart="+id+"&variation_id="+f_id+"&quantity=1");
+		//alert('可选'+);	
+	}else{
+		ajax_from_ady(url+"?add-to-cart="+id+"&quantity=1");
+		//alert('不可选'+url);
+	}
 
+	return false; 
 })
 
 $(document).on("click",".input-mini-minus",function(){
 
 	var i = $(this).next().val(); //获取下一个节点值
-	$(this).next().val(i-1);
-
 	
-	alert(i);
+	if(i > 1){
+		var num = parseInt(i)-1;
+		
+		var add_url = $(this).parent().parent().prev().prev().attr("href");
+
+		
+		var uyt = $(this).next().attr("post_type");			
+		var id = $(this).next().attr("data_product_id");		
+		
+		var remove_url = $(this).parent().parent().next().attr("href");
+		var bbb = $(this).parent().parent().parent().index();
+		if(uyt == 'product_variation'){
+			
+			var f_id = $(this).next().attr("data_variation_id");		
+			ajax_from_ady(remove_url);
+			ajax_from_ady(add_url+"&add-to-cart="+id+"&variation_id="+f_id+"&quantity="+num);	
+		}else{
+			ajax_from_ady(remove_url);
+			ajax_from_ady(add_url+"?add-to-cart="+id+"&quantity="+num);
+		}
+		
+		setTimeout(function(){				
+				var gfg = $("#mini_cart_sff li:last-child");			
+				$(gfg).insertBefore($("#mini_cart_sff li").eq(bbb));			
+		}, 1000);
+		
+	}else{
+		var url = $(this).parent().parent().next().attr("href");
+		ajax_from_ady(url);
+	}
+	
+	return false; 
 
 })
 
@@ -84,6 +128,7 @@ $(document).on("click",".variations_add_to_cart_button",function(){
 	var variation_id = $(this).next().next().next().val();
 	
 	if(variation_id == 0 || variation_id == ''){
+		
 		alert("Select product options before adding them to your shopping cart!");
 		
 		setTimeout(function(){		
@@ -180,7 +225,7 @@ function ajax_from_ady(url){
 	xmlHttp.open("POST",url,false);
 	xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	xmlHttp.send(datastr);
-	document.getElementById("pl").innerHTML = "表单已提交";
+
 	
 	$('.widget_shopping_cart_content').empty();
 
@@ -189,27 +234,41 @@ function ajax_from_ady(url){
 }
 
 $(document).on("click","#wisnhju",function(){
-	
-	alert("Click OK to enter while loading!");
-
+			
 	var id = $(this).attr('data-product_id');
 	var i = 'app_'+String(id);
 	var ii = 'gfdagsg';
-
+	
 	var obj = document.getElementById(i);
+	//alert("Click OK to enter while loading!");
+	
+	//tan_kuan();
+		
 	obj.className="uk-flex-top uk-modal uk-flex uk-open";//相当于在div添加class属性 仅class例外
 	obj.style.display='block';
 	obj.style.cssText='width:100%;display:block;';
-	var uy = $('.flex-control-thumbs').children("li").length;
-	$('.flex-viewport').css('height','auto');
-	$('.flex-active-slide').css('width',100/(uy*2)+'%');	
+	var uy = $("#product-"+id).children('div').children('div').children('div').children("ol").children("li").length;
+	
+	var wid = $("#product-"+id).children('div').children('div').children('div').children(".wc-product--images").width();
+	
 
+	$("#product-"+id).children('div').children('div').children('div').children(".flex-viewport").css('height',wid);
+	$("#product-"+id).children('div').children('div').children('div').children(".flex-viewport").children("figure").children('.woocommerce-product-gallery__image').css('width',wid);
+				
 	
 })
 
+function tan_kuan(){
+	 $('#tan_kuan').html('operate successfully').addClass('alert-success').show().delay(1500).fadeOut();
+}
+
 $(document).on("click",".flex-control-thumbs li",function(){
-	//var num = $(this).index();
-	//$('.flex-viewport').css('height','auto');
+	var num = $(this).index();
+	var wid = $(this).parent('.flex-control-thumbs').prev().prev().width();
+	if(num > 0){
+		$(this).parent('.flex-control-thumbs').prev().children('figure').css("transform","translate3d(-"+wid*num+"px, 0px, 0px)");
+	}
+	
 })
 
 $(document).on("click",".pswp__button--close",function(){
