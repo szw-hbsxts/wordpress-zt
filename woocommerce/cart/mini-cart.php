@@ -19,7 +19,7 @@
 						$product_permalink = apply_filters( 'woocommerce_cart_item_permalink', $_product->is_visible() ? $_product->get_permalink( $cart_item ) : '', $cart_item, $cart_item_key );
 						?>
 						<li class="woocommerce-mini-cart-item mini_cart_item">
-								<a href="<?php echo  esc_url( $product_permalink );?>" style="display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 2;overflow: hidden;">
+								<a href="<?php echo  esc_url( $product_permalink );?>" class="title_car" style="display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 2;overflow: hidden;">
 								<?php
 								$thumbnail = apply_filters( 'woocommerce_cart_item_thumbnail', $_product->get_image(), $cart_item, $cart_item_key );
 								echo $thumbnail;
@@ -62,7 +62,7 @@
 									<label class="screen-reader-text" for="<?php echo $yt;?>">Hoodie - Blue, Yes quantity</label>
 									<span class="input-qty-pm ghjags" style="width:100%;">
 										<button type="button" class="input-pm-act input-mini-minus" style="float: left;">-</button>
-										<input type="text" id="<?php echo $yt;?>" class="input-text qty text" step="1" min="0" max="" post_type="<?php echo $_product->{'post_type'};?>" data_product_id="<?php echo $cart_item['product_id'];?>" data_variation_id="<?php echo $cart_item['variation_id'];?>"  name="cart[<?php echo $cart_item_key;?>][qty]" value="<?php echo $cart_item['quantity'];?>" title="quantity" size="4" placeholder="" inputmode="numeric" style="float: left;">
+										<input type="text" id="<?php echo $yt;?>" class="input-text qty text mini_cart_input" step="1" min="0" max="" post_type="<?php echo $_product->{'post_type'};?>" data_product_id="<?php echo $cart_item['product_id'];?>" data_variation_id="<?php echo $cart_item['variation_id'];?>"  name="cart[<?php echo $cart_item_key;?>][qty]" value="<?php echo $cart_item['quantity'];?>" title="quantity" size="4" placeholder="" inputmode="numeric" style="float: left;">
 										<button type="button" class="input-pm-act input-mini-plus" style="float: left;">+</button>
 									</span>
 									
@@ -75,7 +75,7 @@
 								echo apply_filters(
 									'woocommerce_cart_item_remove_link',
 									sprintf(
-										'<a href="%s" class="remove remove_from_cart_button" onclick="threeFn('.count(WC()->cart->get_cart()).')" aria-label="%s" data-product_id="%s" data-cart_item_key="%s" data-product_sku="%s" style="width: 20px;">&times;</a>',
+										'<a href="%s" class="remove remove_from_cart_button mini_remove_from_cart" aria-label="%s" data-product_id="%s" data-cart_item_key="%s" data-product_sku="%s">&times;</a>',
 										esc_url( wc_get_cart_remove_url( $cart_item_key ) ),
 										__( 'Remove this item', 'customify' ),
 										esc_attr( $product_id ),
@@ -95,11 +95,7 @@
 				?>
 			<?php do_action( 'woocommerce_after_cart_table' ); ?>
 			</ul>
-			<button id='hsjuhu' type="submit" class="button" name="update_cart" value="<?php esc_attr_e( 'Update cart', 'customify' ); ?>" style="width: 100%;font-size: 0.8rem;font-weight: 600;"><?php esc_html_e( 'Update cart', 'customify' ); ?></button>
-			<?php do_action( 'woocommerce_cart_actions' ); ?>
 
-			<?php wp_nonce_field( 'woocommerce-cart', 'woocommerce-cart-nonce' ); ?> 
-			<input type="hidden" name="_wp_http_referer" value="#">
 							
 		</form>
 			<div class="cart-collaterals" id="shghj" style="width:100%;">

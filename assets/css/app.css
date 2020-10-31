@@ -11058,3 +11058,14 @@ td.product-name a,h2.woocommerce-loop-product__title a {
 	font-size: inherit !important;
 }
 
+a.remove.remove_from_cart_button.mini_remove_from_cart {
+    position: absolute;
+    right: 0.5rem;
+    width: 2rem;
+    height: 2rem;
+    margin: 0;
+    top: 1.6rem;
+    padding: 0;
+    line-height: 2rem !important;
+}
+

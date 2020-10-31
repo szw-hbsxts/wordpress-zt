@@ -38,7 +38,8 @@ $(document).on("click",".input-mini-plus",function(){
 	
 	$(this).prev().val(parseInt(o)+1);
 	
-	var url = $(this).parent().parent().prev().prev().attr("href");
+	var url = $(this).parent().parent().parent().children('.title_car').attr("href");
+	
 	
 	var uyt = $(this).prev().attr("post_type");
 	
@@ -63,7 +64,7 @@ $(document).on("click",".input-mini-minus",function(){
 	if(i > 1){
 		var num = parseInt(i)-1;
 		
-		var add_url = $(this).parent().parent().prev().prev().attr("href");
+		var add_url = $(this).parent().parent().parent().children('.title_car').attr("href");
 
 		
 		var uyt = $(this).next().attr("post_type");			
@@ -81,10 +82,14 @@ $(document).on("click",".input-mini-minus",function(){
 			ajax_from_ady(add_url+"?add-to-cart="+id+"&quantity="+num);
 		}
 		
-		setTimeout(function(){				
-				var gfg = $("#mini_cart_sff li:last-child");			
-				$(gfg).insertBefore($("#mini_cart_sff li").eq(bbb));			
-		}, 1000);
+		setTimeout(function(){
+				var nhhh = $("#mini_cart_sff").children().length;
+				if(nhhh > 1){
+					var gfg = $("#mini_cart_sff li:last-child");			
+					$(gfg).insertBefore($("#mini_cart_sff li").eq(bbb));
+				}
+		}, 500);
+		
 		
 	}else{
 		var url = $(this).parent().parent().next().attr("href");
@@ -116,8 +121,20 @@ $(document).on("click",".variations_add_to_cart_button",function(){
 	var y = $(this).parent('.woocommerce-variation-add-to-cart').parent('.single_variation_wrap');
 	var g = y.parent('#variations_hgh');
 	var hg = g.attr("url");
-
+	
+	
 	var cart_id = $(this).next().val();
+	
+	var s = y.prev().children('tbody').children('tr').length;
+	
+	var shuy = ''; 
+	for(var i=0;i<s;i++){
+		var v1 = y.prev().children('tbody').children('tr').eq(i).children('.value').children('select').attr('name');
+		var v2 = y.prev().children('tbody').children('tr').eq(i).children('.value').children('select').val();
+		shuy += '&' + v1+"="+v2;
+	}
+	
+
 	
 	var y = $(this).offset().top - $(document).scrollTop();//元素在当前视窗距离顶部的位置
 	var x = $(this).offset().left;
@@ -139,7 +156,7 @@ $(document).on("click",".variations_add_to_cart_button",function(){
 		return false;
 	}
 
-	var url = hg + "?variation_id="+variation_id+"&add-to-cart="+cart_id+"&quantity="+$(this).attr("data-quantity");
+	var url = hg + "?variation_id="+variation_id+"&add-to-cart="+cart_id+"&quantity="+$(this).attr("data-quantity")+shuy;
 	
 	ajax_from_ady(url);
 	
@@ -201,7 +218,70 @@ $(document).on("click",".grouped_add_to_cart_button",function(){
 	return false; // 返回false，阻止跳转
 
 })
+
+$(document).on("change",".mini_cart_input",function(){
+	var a1 = $(this).attr('value');
+	var a2 = $(this).val();
+	if(a2 == 0){
+		$(this).prev().trigger("click");
+	}else if(a2 > a1){
+		var yt = a2 - a1;
+		
+		var url = $(this).parent().parent().parent().children('.title_car').attr("href");
+								
+		var uyt = $(this).attr("post_type");
+		
+		var id = $(this).attr("data_product_id");
+		
+		if(uyt == 'product_variation'){
+			var f_id = $(this).attr("data_variation_id");
+			ajax_from_ady(url+"&add-to-cart="+id+"&variation_id="+f_id+"&quantity="+yt);
+			//alert('可选'+);	
+		}else{
+			ajax_from_ady(url+"?add-to-cart="+id+"&quantity="+yt);
+			//alert('不可选'+url);
+		}
+		return false; 		
+	}else if(a2 < a1){
+		
+		
+		var add_url = $(this).parent().parent().parent().children('.title_car').attr("href");
+
+		
+		var uyt = $(this).attr("post_type");			
+		var id = $(this).attr("data_product_id");		
+		
+		var remove_url = $(this).parent().parent().next().attr("href");
+		var bbb = $(this).parent().parent().parent().index();
+		if(uyt == 'product_variation'){
+
+			var f_id = $(this).attr("data_variation_id");		
+			ajax_from_ady(remove_url);
+			ajax_from_ady(add_url+"&add-to-cart="+id+"&variation_id="+f_id+"&quantity="+a2);	
+		}else{
+			ajax_from_ady(remove_url);
+			ajax_from_ady(add_url+"?add-to-cart="+id+"&quantity="+a2);
+		}
+		
+		setTimeout(function(){
+				var nhhh = $("#mini_cart_sff").children().length;
+				if(nhhh > 1){
+					var gfg = $("#mini_cart_sff li:last-child");			
+					$(gfg).insertBefore($("#mini_cart_sff li").eq(bbb));
+				}
+		}, 500);
+		
+		
+		return false; 		
+	}
+	
+})
+
+
+
 function ajax_from_ady(url){
+	var host = window.location.host;
+	
 	//创建xmlHttp对象
 	var xmlHttp;
 	if(window.ActiveXObject){
@@ -229,7 +309,7 @@ function ajax_from_ady(url){
 	
 	$('.widget_shopping_cart_content').empty();
 
-	$('body').append("<script src='http://www.wdp01.com/wp-content/plugins/woocommerce/assets/js/frontend/cart-fragments.min.js'></script>"); 
+	$('body').append("<script src='http://"+host+"/wp-content/plugins/woocommerce/assets/js/frontend/cart-fragments.min.js'></script>"); 
 	
 }
 
