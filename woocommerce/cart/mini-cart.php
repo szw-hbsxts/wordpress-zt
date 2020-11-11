@@ -98,20 +98,18 @@
 
 							
 		</form>
-			<div class="cart-collaterals" id="shghj" style="width:100%;">
-				<?php
-				/**
-				 * Cart collaterals hook.
-				 *
-				 * @hooked woocommerce_cross_sell_display
-				 * @hooked woocommerce_cart_totals - 10
-				 */
-				do_action( 'woocommerce_cart_collaterals' );
-				?>
-			</div>
+		<p class="woocommerce-mini-cart__total total">
+			<?php esc_html_e( 'Total', 'woocommerce' ); ?>:
+			<?php wc_cart_totals_order_total_html(); ?>
+		
+		</p>
+		<div class="wc-proceed-to-checkout" style="width:100%;">
+			<?php do_action( 'woocommerce_proceed_to_checkout' ); ?>
+		</div>
 		<?php } ?>
 
 <script>
 	var gf = document.getElementById("uk-badge");
 	gf.innerHTML= <?php echo count(WC()->cart->get_cart());?>;
+
 </script>

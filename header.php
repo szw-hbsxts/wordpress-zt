@@ -30,10 +30,20 @@ add_filter('show_admin_bar', '__return_false');
 			};
 	</script>
   <!-- import Vue before Element -->
-  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/1.12.4/jquery.js"></script>
-  <script src="<?php echo get_template_directory_uri();?>/assets/js/vue.js"></script>
-  <script src="<?php echo get_template_directory_uri();?>/assets/js/index.js"></script>
+  <script src="/wp-content/themes/wordpress-zt/assets/js/jquery.js"></script>
+  <script src="/wp-content/themes/wordpress-zt/assets/js/index.js"></script>
+  <?php
+	if(is_home()){
+		echo "<script type='text/javascript' src='/wp-content/themes/wordpress-zt/assets/js/banner.js'></script>";
+	}
 
+	?>	
+	  <?php
+		if(is_checkout()){
+			echo "<script type='text/javascript' src='/wp-content/themes/wordpress-zt/assets/js/checkout.js'></script>";
+		}
+
+	?>		
 </head>
 
 <body <?php body_class(); ?>>
@@ -77,164 +87,6 @@ add_filter('show_admin_bar', '__return_false');
 								</div>
 							</div>
 						</li>
-						<li class=""> 
-							<a href="javascript:;" >
-								<i class="pyf pyf-huabanbeifen4"></i>
-							</a>
-							<div class="py-header-language-dropdown uk-hi" uk-dropdown="mode: click;offset:30" >
-								<div class="py-language" >
-    								<h4>Location</h4>
-    								<button class="uk-button uk-button-default notranslate" type="button"> - - </button>
-   									<div id="py-language-dropdown" class=" notranslate" uk-dropdown="offset:-19;mode: click;pos: bottom-center;boundary:.py-language;boundary-align: true">
-									<ul class="uk-nav uk-dropdown-nav" data-default="" >    
-										<li >
-											<a data-lang="en">
-												<div>
-													<svg class="py-language-svg" aria-hidden="true">
-														<use xlink:href="#py-nf-world-flag_USA"></use>
-													</svg>
-													<span>English</span>
-												</div>
-											</a>
-										</li>
-										
-										<li >
-															<a data-lang="fi">
-												<div>
-													<svg class="py-language-svg" aria-hidden="true">
-														<use xlink:href="#py-nf-world-flag_FIN"></use>
-													</svg>
-													<span>Suomi</span>
-												</div>
-											</a>
-										</li>
-										
-										<li >
-															<a data-lang="fr">
-												<div>
-													<svg class="py-language-svg" aria-hidden="true">
-														<use xlink:href="#py-nf-world-flag_FRA"></use>
-													</svg>
-													<span>Français</span>
-												</div>
-											</a>
-										</li>
-										
-										<li >
-															<a data-lang="de">
-												<div>
-													<svg class="py-language-svg" aria-hidden="true">
-														<use xlink:href="#py-nf-world-flag_DEU"></use>
-													</svg>
-													<span>Deutsch</span>
-												</div>
-											</a>
-										</li>
-										
-										<li >
-															<a data-lang="el">
-												<div>
-													<svg class="py-language-svg" aria-hidden="true">
-														<use xlink:href="#py-nf-world-flag_GRC"></use>
-													</svg>
-													<span>Ελληνικά</span>
-												</div>
-											</a>
-										</li>
-										
-										<li >
-															<a data-lang="it">
-												<div>
-													<svg class="py-language-svg" aria-hidden="true">
-														<use xlink:href="#py-nf-world-flag_ITA"></use>
-													</svg>
-													<span>Italiano</span>
-												</div>
-											</a>
-										</li>
-										
-										<li >
-															<a data-lang="ja">
-												<div>
-													<svg class="py-language-svg" aria-hidden="true">
-														<use xlink:href="#py-nf-world-flag_JPN"></use>
-													</svg>
-													<span>日本語</span>
-												</div>
-											</a>
-										</li>
-										
-										<li >
-															<a data-lang="ru">
-												<div>
-													<svg class="py-language-svg" aria-hidden="true">
-														<use xlink:href="#py-nf-world-flag_RUS"></use>
-													</svg>
-													<span>Русский</span>
-												</div>
-											</a>
-										</li>
-										
-										<li >
-															<a data-lang="es">
-												<div>
-													<svg class="py-language-svg" aria-hidden="true">
-														<use xlink:href="#py-nf-world-flag_ESP"></use>
-													</svg>
-													<span>Español</span>
-												</div>
-											</a>
-										</li>
-										
-										<li >
-															<a data-lang="zh-CN">
-												<div>
-													<svg class="py-language-svg" aria-hidden="true">
-														<use xlink:href="#py-nf-world-flag_CHN"></use>
-													</svg>
-													<span>简体中文</span>
-												</div>
-											</a>
-										</li>
-										
-										<li >
-															<a data-lang="zh-TW">
-												<div>
-													<svg class="py-language-svg" aria-hidden="true">
-														<use xlink:href="#py-nf-world-flag_HKG"></use>
-													</svg>
-													<span>繁體中文</span>
-												</div>
-											</a>
-										</li>
-										
-									</ul>
-    							</div>
-							</div>
-							<div class="py-currency" >
-								<h4>Currency</h4>
-								<button class="uk-button uk-button-default notranslate" type="button"> - - </button>
-								<div id="py-currency-dropdown" class=" notranslate" uk-dropdown="offset:-19;mode: click;pos: bottom-center;boundary:.py-currency;boundary-align: true" >
-									<ul class="uk-nav uk-dropdown-nav currency_switcher">
-										<li>
-											<a href="javascript:;" class="default currency-USD" data-currencycode="USD">
-												<div>
-													<svg class="py-language-svg" aria-hidden="true">
-														<use xlink:href="#py-nf-world-flag_USA"></use>
-													</svg> 
-													<span>USD</span>
-												</div>
-											</a>
-										</li>
-										<li>
-											<a href="javascript:;" class="currency-CNY" data-currencycode="CNY"> 
-												<div>
-													<svg class="py-language-svg" aria-hidden="true">
-														<use xlink:href="#py-nf-world-flag_CHN"></use></svg> <span>CNY</span></div></a></li><li><a href="javascript:;" class="currency-HKD" data-currencycode="HKD"> <div><svg class="py-language-svg" aria-hidden="true"><use xlink:href="#py-nf-world-flag_HKG"></use></svg> <span>HKD</span></div></a></li><li><a href="javascript:;" class="currency-EUR" data-currencycode="EUR"> <div><svg class="py-language-svg" aria-hidden="true"><use xlink:href="#py-nf-world-flag_EuropeUnion"></use></svg> <span>EUR</span></div></a></li><li><a href="javascript:;" class="currency-AUD" data-currencycode="AUD"> <div><svg class="py-language-svg" aria-hidden="true"><use xlink:href="#py-nf-world-flag_AUS"></use></svg> <span>AUD</span></div></a></li><li><a href="javascript:;" class="currency-CAD" data-currencycode="CAD"> <div><svg class="py-language-svg" aria-hidden="true"><use xlink:href="#py-nf-world-flag_CAN"></use></svg> <span>CAD</span></div></a></li><li><a href="javascript:;" class="currency-DEM" data-currencycode="DEM"> <div><svg class="py-language-svg" aria-hidden="true"><use xlink:href="#py-nf-world-flag_DEU"></use></svg> <span>DEM</span></div></a></li><li><a href="javascript:;" class="currency-JPY" data-currencycode="JPY"> <div><svg class="py-language-svg" aria-hidden="true"><use xlink:href="#py-nf-world-flag_JPN"></use></svg> <span>JPY</span></div></a></li>
-									</ul>
-								</div>
-							</div>
-						</li>
 						<li class="py-header-cart">
 							<a class="cart-customlocation" href="#py-mini-cart"uk-toggle>
 							<i class="pyf pyf-gouwuche"></i>
@@ -264,14 +116,10 @@ add_filter('show_admin_bar', '__return_false');
 	do_action( 'customify/before-site-content' );
 	?>
 	<div id="site-content" <?php customify_site_content_class(); ?>>
-		<div <?php customify_site_content_container_class(); ?>>
+		<div <?php customify_site_content_container_class(); ?> <?php if(is_home()){echo 'style="display:none;"';}?>>
 			<div <?php customify_site_content_grid_class(); ?>>
 				<main id="main" <?php customify_main_content_class(); ?>>
 
-				<!-- <div class="uk-margin-medium-bottom">
-					<h1 id="py-product-0" class="py-title uk-article-title">
-						products        </h1>
-				</div> -->
 				<?php
 					if(is_woocommerce()){
 						if(!is_product()){
