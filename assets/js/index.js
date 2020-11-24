@@ -527,14 +527,20 @@ $(document).on("click","#shipping_method li",function(){
 })
 
 $(document).on("click",".woo-jiujs-jhu",function(){
-	
-	//alert($(this).parent().parent().next().children('.value').children('select').attr("id"));
+	var inde = $(this).index();
 	$(this).parent().children('.uk-active').removeClass('uk-active');
 	$(this).addClass("uk-active");
 	var num = $(this).attr('data-key');
-	var key = $(this).attr('data-value');	
-	$(this).parent().prev('.value').children('select').children('option').eq(num).attr("selected",true);
-	//alert($(this).parent().prev('.value').children('select').val());	
+	var key = $(this).attr('data-value');
+
+	$(this).parent().prev('.value').children('select').children('option').attr("selected",false);
+	
+	//$(this).parent().prev('.value').children('select').children('option').eq(num).attr("selected",true);
+
+	$(this).parent().prev('.value').children('select').get(0).selectedIndex=num;
+
+	//alert($(this).parent().prev('.value').children('select').find("option:selected").text());
+	
 	$(this).parent().prev('.value').children('select').children('option').eq(num).trigger("change");
 	
 	var kkjj = $(this).parent().parent().prevAll().length;	

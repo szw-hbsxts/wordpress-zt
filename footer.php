@@ -94,30 +94,13 @@ do_action( 'customify/site-end/after' );
                         <h4>CUSTOMER SERVICE</h4>
                         <div class="menu-customer_service-container">
 							<ul id="nav-customer-service" class="uk-nav">
-							<?php
+			                    <ul class="sitemap-list">
 
-								$cats = get_categories();
-
-								foreach ( $cats as $cat ) {
-
-								query_posts( 'showposts=10&cat=' . $cat->cat_ID );
-
-								?>
-
-								<!-- <h3><php echo $cat->cat_name; ?></h3> -->
-
-								<ul class="sitemap-list">
-
-									<?php while ( have_posts() ) { the_post(); ?>
-
-									<li><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></li>
-
-									<?php } wp_reset_query(); ?>
-
+									<li><a href="https://www.aoogeek.com/index.php/contact-us/">Contact Us</a></li>
+									<li><a href="https://www.aoogeek.com/index.php/privacy-policy/">Privacy Policy</a></li>
+									<li><a href="https://www.aoogeek.com/index.php/return-refund-policy/">Return &amp; Refund Policy</a></li>
+									<li><a href="https://www.aoogeek.com/index.php/terms-of-service/">Terms of service</a></li>
 								</ul>
-
-								<?php } ?>
-
 							</ul>
 						</div>                    
 					</div>
@@ -149,53 +132,10 @@ do_action( 'customify/site-end/after' );
         </div>
     </div>
     <div class="py-copyright uk-flex uk-flex-between uk-text-meta uk-flex-middle ">
-	<div>Copyright © <?php echo (new DateTime)->format("Y");?> <a href="<?php echo home_url();?>"><?php bloginfo( 'name' ); ?> All rights reserved.</a></div>
-	<ul class="pyf-pay uk-flex">
-		<li>
-			<svg aria-hidden="true">
-				<use xlink:href="#pyf-pay-icon_zhifuamex"></use>
-			</svg>
-		</li>
-		<li>
-			<svg aria-hidden="true">
-				<use xlink:href="#pyf-pay-icon_zhifudiscover"></use>
-			</svg>
-		</li>
-		<li>
-			<svg aria-hidden="true">
-				<use xlink:href="#pyf-pay-icon_zhifujcb"></use>
-			</svg>
-		</li>
-		<li>
-			<svg aria-hidden="true">
-				<use xlink:href="#pyf-pay-icon_zhifumastercard"></use>
-			</svg>
-		</li>
-		<li>
-			<svg aria-hidden="true">
-				<use xlink:href="#pyf-pay-icon_zhifupaypal"></use>
-			</svg>
-		</li>
-		<li>
-			<svg aria-hidden="true">
-				<use xlink:href="#pyf-pay-icon_zhifuunionpay"></use>
-			</svg>
-		</li>
-		<li>
-			<svg aria-hidden="true">
-				<use xlink:href="#pyf-pay-icon_zhifuvisa"></use>
-			</svg>
-		</li>
-		<li>
-			<svg aria-hidden="true">
-				<use xlink:href="#pyf-pay-icon_zhifudinersclub"></use>
-			</svg>
-		</li>
-	</ul>
+	<div style="width:100%;font-size: 1rem;text-align: center;padding: 0.8rem;">Copyright © <?php echo (new DateTime)->format("Y");?> <a href="<?php echo home_url();?>"><?php bloginfo( 'name' ); ?> All rights reserved.</a></div>
 </div>
 </div>
 </footer>
-
 
 
 
@@ -205,7 +145,7 @@ do_action( 'customify/site-end/after' );
 		<div class="menu-header_menu-container">
 			<ul id="nav-top-mobile" class="uk-nav uk-nav-primary uk-nav-center uk-margin-auto-vertical">
 				<li><a href="<?php echo home_url();?>/index.php/shop/">All Products</a></li>
-				<li><a href="<?php echo home_url();?>/?page_id=3&preview=true">Contact Us</a></li>
+				<li><a href="<?php echo home_url();?>/index.php/contact-us/">Contact Us</a></li>
 				<li><a href="<?php echo home_url();?>/index.php/my-account/">my account</a></li>
 				<li><a href="<?php echo home_url();?>/index.php/cart/">Cart</a></li>
 			</ul>
@@ -224,11 +164,12 @@ do_action( 'customify/site-end/after' );
 <div id="google_translate_element"></div>
 
 
-
 <?php
 if(!is_account_page() && !is_checkout() && !is_cart()){
 
 ?>
+
+
 
 <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
 	<div class="pswp__bg"></div>

@@ -10751,7 +10751,9 @@ dl.variation dd p {
 	height:10px
 }
 .woocommerce div.product div.images .flex-control-thumbs>li img.flex-active {
-	filter:contrast(0%) grayscale(0%)
+	filter:contrast(0%) grayscale(0%);
+	background: #000;
+    opacity: 1;
 }
 .woocommerce div.product .woocommerce-product-rating {
 	margin:0

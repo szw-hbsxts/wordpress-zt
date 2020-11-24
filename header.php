@@ -59,7 +59,7 @@ add_filter('show_admin_bar', '__return_false');
 					<div class="menu-header_menu-container">
 						<ul id="nav-top" class="uk-navbar-nav">
 							<li id="menu-item-13"><a href="<?php echo home_url();?>/index.php/shop/">All Products</a></li>
-							<li id="menu-item-2676"><a href="<?php echo home_url();?>/?page_id=3&preview=true">Contact Us</a></li>
+							<li id="menu-item-2676"><a href="<?php echo home_url();?>/index.php/contact-us/">Contact Us</a></li>
 							<li id="menu-item-14"><a href="<?php echo home_url();?>/index.php/my-account/">my account</a></li>
 							<li id="menu-item-3195"><a href="<?php echo home_url();?>/index.php/cart/">Cart</a></li>
 						</ul>
