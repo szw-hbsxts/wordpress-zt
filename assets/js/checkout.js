@@ -110,49 +110,6 @@ $(document).ready(function(){
 		$('#billing_country_field').insertBefore('#billing_state_field');
 	}, 1000);
 	
-
-	var sg = $('#payment ul li').length;
-	if(sg > 0){
-		if(sg > 1){
-			if($('#payment ul li').is('.payment_method_paypal') || $('#payment ul li').is('.payment_method_bacs')){
-				setTimeout(function(){
-					$('.wc_payment_method').css('display','none');
-					$('.wc_payment_method input').css('display','none');
-					$('.wc_payment_method label').css('padding-left','0');
-				}, 2000);
-				if($('#payment ul li').is('.payment_method_paypal')){
-					setTimeout(function(){
-						$('.payment_method_paypal').css('display','block');
-					}, 2000);
-				}else{
-					setTimeout(function(){
-						$('.payment_method_bacs').css('display','block');
-					}, 2000);
-				}
-			}
-
-		}
-		if($('#payment ul li').is('.payment_method_paypal')){
-			setTimeout(function(){
-				$('.py_paypal_button_cart').css('display','');
-			}, 2000);
-		}
-		if($('#payment ul li').is('.payment_method_bacs')){						
-			setTimeout(function(){
-				$('.paypal-button-label-container').css('display','');
-				var t = $('#payment ul').children('.payment_method_bacs').children('label').text();
-				$('.paypal-button-label-container').children('.paypal-button-text').text(t);
-			}, 2000);
-		}
-		if(!$('#payment ul li').is('.payment_method_paypal') && !$('#payment ul li').is('.payment_method_bacs')){
-			setTimeout(function(){
-				$('#place_order').css('display','');		
-			}, 2000);
-		}
-
-	}else{
-		$('#wpg_paypal_button_checkout').css('display','none');
-	}
 })
 
 $(document).on("click",'.py-checkout-order-summary-after div div a',function(e){

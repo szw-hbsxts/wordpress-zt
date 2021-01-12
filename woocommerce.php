@@ -62,7 +62,7 @@ if ( $the_query->have_posts() ) :
 	// 通过查询的结果，开始主循环
 	while ( $the_query->have_posts() ) :
 		$the_query->the_post(); //获取到特定的文章
-		echo '<li id="app_'.get_the_ID().'" class="uk-flex-top uk-modal" uk-modal="bg-close:false" style="display:none;">';
+		echo '<li id="app_'.get_the_ID().'" class="uk-flex-top uk-modal" uk-modal="bg-close:false" style="display:none;" dataid="#button_'.get_the_ID().'">';
 		echo '<div class="uk-modal-dialog  uk-margin-auto-vertical">';
 		echo '<button class="uk-modal-close-default" type="button" uk-close></button>';
 		echo '<div class="uk-modal-body">';
@@ -110,8 +110,9 @@ if ( $the_query->have_posts() ) :
 
 		// echo woocommerce_single_variation_add_to_cart_button();
 		
+		echo '<div id="button_'.get_the_ID().'">';
 		echo woocommerce_template_single_add_to_cart();
-
+		echo "</div>";
 		//echo woocommerce_simple_add_to_cart();   //有货显示无货不显示
 
 		// echo woocommerce_product_description_tab(); 描述

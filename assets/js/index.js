@@ -132,7 +132,7 @@ $(document).on("click",".input-pm-plus",function(){
 })
 
 $(document).on("click",".cart-customlocation",function(){
-	var s = $(this).attr('href');
+	var s = $(this).attr('data');
 	$(s).addClass("uk-offcanvas uk-offcanvas-overlay uk-open");
 	$(s).css('display','block');
 	$(s).children('.uk-offcanvas-bar').addClass("uk-offcanvas-bar-animation uk-offcanvas-slide mymove");
@@ -166,25 +166,11 @@ $(document).on("click",".input-pm-minus",function(){
 $(document).on("click",".input-mini-plus",function(){
 	
 	var o = $(this).prev().val(); //获取上一个节点值
+	$(this).prev().attr('value',Number(o)+1);
+	$(this).prev().val(Number(o)+1);
 	
-	$(this).prev().val(parseInt(o)+1);
+	$('.cart-mini-butt').trigger("click");
 	
-	var url = $(this).parent().parent().parent().children('.title_car').attr("href");
-	
-	
-	var uyt = $(this).prev().attr("post_type");
-	
-	var id = $(this).prev().attr("data_product_id");
-	
-	if(uyt == 'product_variation'){
-		var f_id = $(this).prev().attr("data_variation_id");
-		ajax_from_ady(url+"&add-to-cart="+id+"&variation_id="+f_id+"&quantity=1");
-		//alert('可选'+);	
-	}else{
-		ajax_from_ady(url+"?add-to-cart="+id+"&quantity=1");
-		//alert('不可选'+url);
-	}
-
 	return false; 
 })
 
@@ -193,42 +179,34 @@ $(document).on("click",".input-mini-minus",function(){
 	var i = $(this).next().val(); //获取下一个节点值
 	
 	if(i > 1){
-		var num = parseInt(i)-1;
-		
-		var add_url = $(this).parent().parent().parent().children('.title_car').attr("href");
-
-		
-		var uyt = $(this).next().attr("post_type");			
-		var id = $(this).next().attr("data_product_id");		
-		
-		var remove_url = $(this).parent().parent().next().attr("href");
-		var bbb = $(this).parent().parent().parent().index();
-		if(uyt == 'product_variation'){
-			
-			var f_id = $(this).next().attr("data_variation_id");		
-			ajax_from_ady(remove_url);
-			ajax_from_ady(add_url+"&add-to-cart="+id+"&variation_id="+f_id+"&quantity="+num);	
-		}else{
-			ajax_from_ady(remove_url);
-			ajax_from_ady(add_url+"?add-to-cart="+id+"&quantity="+num);
-		}
-		
-		setTimeout(function(){
-				var nhhh = $("#mini_cart_sff").children().length;
-				if(nhhh > 1){
-					var gfg = $("#mini_cart_sff li:last-child");			
-					$(gfg).insertBefore($("#mini_cart_sff li").eq(bbb));
-				}
-		}, 500);
-		
-		
+		var num = Number(i)-1;
+		$(this).next().attr('value',num);
+		$(this).next().val(num);
+		$('.cart-mini-butt').trigger("click");
 	}else{
-		var url = $(this).parent().parent().next().attr("href");
-		ajax_from_ady(url);
-	}
-	
+		var url = $(this).parent().parent().next().trigger("click");
+	}	
 	return false; 
+})
 
+
+
+
+$(document).on("change",".mini_cart_input",function(){
+	var a1 = $(this).attr('value');
+	var a2 = $(this).val();
+	
+	if(a2 == 0){
+		$(this).parent().parent().next().trigger("click");
+	}else{	
+		$('.cart-mini-butt').trigger("click");
+	}
+	return false;	
+})
+
+$(document).on("change",".cart-mini-butt",function(){
+	var url = window.location.href;
+	window.location.replace(url)
 })
 
 $(document).on("click",".product_type_simple",function(){
@@ -248,58 +226,60 @@ $(document).on("click",".product_type_simple",function(){
 })
 
 $(document).on("click",".variations_add_to_cart_button",function(){
-	$(this).children('span#go_globule').css({"opacity":"1","transform":"translate3d(0px,0px,0px)","transition":"all 0s cubic-bezier(0, 0, 0, 0) 0s","display":"block"});
-	var y = $(this).parent('.woocommerce-variation-add-to-cart').parent('.single_variation_wrap');
-	var g = y.parent('#variations_hgh');
-	var hg = g.attr("url");
-	
-	
-	var cart_id = $(this).next().val();
-	
-	var s = y.prev().children('tbody').children('tr').length;
-	
-	var shuy = ''; 
-	for(var i=0;i<s;i++){
-		var v1 = y.prev().children('tbody').children('tr').eq(i).children('.value').children('select').attr('name');
-		var v2 = y.prev().children('tbody').children('tr').eq(i).children('.value').children('select').val();
-		shuy += '&' + v1+"="+v2;
-	}
-	
-
-	
-	var y = $(this).offset().top - $(document).scrollTop();//元素在当前视窗距离顶部的位置
-	var x = $(this).offset().left;
-	
-	var cart_y = $('#uk-badge').offset().top - $(document).scrollTop();
-	var cart_x = $('#uk-badge').offset().left;
-	
-	var variation_id = $(this).next().next().next().val();
-	
-	if(variation_id == 0 || variation_id == ''){
+	var num = $(this).prev().children('span').children('input').val();	
+	if(num != '0'){
 		
-		alert("Select product options before adding them to your shopping cart!");
-		
+		//移动的小球
+		$(this).children('span#go_globule').css({"opacity":"1","transform":"translate3d(0px,0px,0px)","transition":"all 0s cubic-bezier(0, 0, 0, 0) 0s","display":"block"});		
+		//获取产品链接
+		var y = $(this).parent('.woocommerce-variation-add-to-cart').parent('.single_variation_wrap');
+		var g = y.parent('#variations_hgh');
+		var hg = g.attr("url");
+		//获取主体id
+		var cart_id = $(this).next().val();
+		//获取变量数量
+		var s = y.prev().children('tbody').children('tr').length;
+		//生成变体
+		var shuy = ''; 
+		for(var i=0;i<s;i++){
+			var v1 = y.prev().children('tbody').children('tr').eq(i).children('.value').children('select').attr('name');
+			var v2 = y.prev().children('tbody').children('tr').eq(i).children('.value').children('select').val();
+			shuy += '&' + v1+"="+v2;
+		}
+		//获取变量id
+		var variation_id = $(this).next().next().next().val();		
+		//不能为空
+		if(variation_id == 0 || variation_id == ''){	
+			alert("Select product options before adding them to your shopping cart!");		
+			setTimeout(function(){		
+				var obj = document.getElementById("go_globule");
+				obj.style.display = 'none';	
+			}, 2000);			
+			return false;
+		}
+		//添加购物车链接
+		var url = hg + "?variation_id="+variation_id+"&add-to-cart="+cart_id+"&quantity="+num+shuy;
+		//添加购物车
+		ajax_from_ady(url);
+		//小球需要移动的轨迹
+		var y = $(this).offset().top - $(document).scrollTop();//元素在当前视窗距离顶部的位置
+		var x = $(this).offset().left;		
+		var cart_y = $('#uk-badge').offset().top - $(document).scrollTop();
+		var cart_x = $('#uk-badge').offset().left;
+		//移动小球
+		$(this).children('span#go_globule').css({"transform":"translate3d("+(cart_x-x)+"px,"+(cart_y-y)+"px,55px)","transition":"all 2s cubic-bezier(0,.68,0,1) 0s","opacity":"0"});
+		//关闭小球
 		setTimeout(function(){		
 			var obj = document.getElementById("go_globule");
 			obj.style.display = 'none';	
 		}, 2000);
 		
-		return false;
+		$('body').append("<script id='cart-fragments' src='/wp-content/plugins/woocommerce/assets/js/frontend/cart-fragments.min.js'></script>");
+		setTimeout(function(){
+			$('#cart-fragments').remove();
+		}, 2000);
 	}
-
-	var url = hg + "?variation_id="+variation_id+"&add-to-cart="+cart_id+"&quantity="+$(this).attr("data-quantity")+shuy;
-	
-	ajax_from_ady(url);
-	
-	$(this).children('span#go_globule').css({"transform":"translate3d("+(cart_x-x)+"px,"+(cart_y-y)+"px,55px)","transition":"all 2s cubic-bezier(0,.68,0,1) 0s","opacity":"0"});
-	
-	setTimeout(function(){		
-		var obj = document.getElementById("go_globule");
-		obj.style.display = 'none';	
-	}, 2000);
-	
 	return false; // 返回false，阻止跳转
-
 })
 
 $(document).on("click",".grouped_add_to_cart_button",function(){
@@ -350,65 +330,6 @@ $(document).on("click",".grouped_add_to_cart_button",function(){
 
 })
 
-$(document).on("change",".mini_cart_input",function(){
-	var a1 = $(this).attr('value');
-	var a2 = $(this).val();
-	if(a2 == 0){
-		$(this).prev().trigger("click");
-	}else if(a2 > a1){
-		var yt = a2 - a1;
-		
-		var url = $(this).parent().parent().parent().children('.title_car').attr("href");
-								
-		var uyt = $(this).attr("post_type");
-		
-		var id = $(this).attr("data_product_id");
-		
-		if(uyt == 'product_variation'){
-			var f_id = $(this).attr("data_variation_id");
-			ajax_from_ady(url+"&add-to-cart="+id+"&variation_id="+f_id+"&quantity="+yt);
-			//alert('可选'+);	
-		}else{
-			ajax_from_ady(url+"?add-to-cart="+id+"&quantity="+yt);
-			//alert('不可选'+url);
-		}
-		return false; 		
-	}else if(a2 < a1){
-		
-		
-		var add_url = $(this).parent().parent().parent().children('.title_car').attr("href");
-
-		
-		var uyt = $(this).attr("post_type");			
-		var id = $(this).attr("data_product_id");		
-		
-		var remove_url = $(this).parent().parent().next().attr("href");
-		var bbb = $(this).parent().parent().parent().index();
-		if(uyt == 'product_variation'){
-
-			var f_id = $(this).attr("data_variation_id");		
-			ajax_from_ady(remove_url);
-			ajax_from_ady(add_url+"&add-to-cart="+id+"&variation_id="+f_id+"&quantity="+a2);	
-		}else{
-			ajax_from_ady(remove_url);
-			ajax_from_ady(add_url+"?add-to-cart="+id+"&quantity="+a2);
-		}
-		
-		setTimeout(function(){
-				var nhhh = $("#mini_cart_sff").children().length;
-				if(nhhh > 1){
-					var gfg = $("#mini_cart_sff li:last-child");			
-					$(gfg).insertBefore($("#mini_cart_sff li").eq(bbb));
-				}
-		}, 500);
-		
-		
-		return false; 		
-	}
-	
-})
-
-
 
 function ajax_from_ady(url){
 	var host = window.location.host;
@@ -436,13 +357,30 @@ function ajax_from_ady(url){
 	xmlHttp.open("POST",url,false);
 	xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	xmlHttp.send(datastr);
-
-	
-	$('.widget_shopping_cart_content').empty();
-
-	$('body').append("<script src='/wp-content/plugins/woocommerce/assets/js/frontend/cart-fragments.min.js'></script>"); 
-	
 }
+
+/**产品添加购物车**/
+$(document).on("click","#cp_add_wsj",function(){
+	var fd = $(this).parent().next().attr('dataid');
+	var sd = $(fd).children('form').children('button').attr('class');
+	if(sd == undefined){
+		$(fd).children('form').children('div').children('div').eq(1).children('button').click();
+	}else{
+		$(fd).children('form').children('button').click();
+	}
+})
+
+/**产品添加购物车**/
+$(document).on("click","#index_add_wsj",function(){
+	var fd = $(this).attr('dataid');
+	var sd = $(fd).children('form').children('button').attr('class');
+	if(sd == undefined){
+		$(fd).children('form').children('div').children('div').eq(1).children('button').click();
+	}else{
+		$(fd).children('form').children('button').click();
+	}
+})
+
 
 $(document).on("click","#wisnhju",function(){
 	$('#butt_vue').css('display','block');	
@@ -500,15 +438,7 @@ $(document).on("click",".pswp__button--close",function(){
 	$('.pswp__img').css('display','none');
 	
 })
-$(document).on("click",".woocommerce-product-gallery__trigger",function(){
 
-	$('.pswp--supports-fs').css('display','block');
-	$('.pswp__img').css('display','block');
-	//var yt = $('.pswp__caption__center').text();
-	//alert(yt);
-	//alert('测试');
-
-})
 $(document).on("click",".pswp__container",function(){
 
 	$('.pswp--supports-fs').css('display','none');

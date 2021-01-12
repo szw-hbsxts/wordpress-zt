@@ -102,4 +102,20 @@ function woocommerce_header_add_to_cart_fragment( $fragments ) {
 
 add_filter( 'loop_shop_per_page', create_function( '$cols', 'return 8;' ), 20 );
 
+add_filter( 'woocommerce_add_to_cart_fragments', 'header_add_to_cart_fragment', 30, 1 );
+function header_add_to_cart_fragment( $fragments ) {
+    global $woocommerce;
 
+    ob_start();
+
+    ?>
+    <a class="cart-customlocation" data="#py-mini-cart" uk-toggle>
+	<i class="pyf pyf-gouwuche"></i>
+		<span id="uk-badge" class="uk-badge"><?php echo sprintf(_n('%d', '%d', $woocommerce->cart->cart_contents_count, 'woothemes'), $woocommerce->cart->cart_contents_count);?></span>
+	</a>
+    <?php
+    $fragments['a.cart-customlocation'] = ob_get_clean();
+
+    return $fragments;
+	
+}

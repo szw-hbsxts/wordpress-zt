@@ -39,6 +39,7 @@ if ( function_exists( 'wc_product_class' ) ) {
 
 	?>
 	</div>
+	<button type="submit" id="cp_add_wsj">add to cart</button>
 </li>
 
 <?php

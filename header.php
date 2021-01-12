@@ -58,6 +58,40 @@ add_filter('show_admin_bar', '__return_false');
 				<div class="uk-visible@s">
 					<div class="menu-header_menu-container">
 						<ul id="nav-top" class="uk-navbar-nav">
+							<li id="category">
+								<a href="#">Category</a>
+								<div class="category_list">
+									<ul>
+									<?php
+										$taxonomy     = 'product_cat';
+										$orderby      = 'name';  
+										$show_count   = 0;      // 1 for yes, 0 for no
+										$pad_counts   = 0;      // 1 for yes, 0 for no
+										$hierarchical = 1;      // 1 for yes, 0 for no  
+										$title        = '';  
+										$empty        = 0;
+
+										$args = array(
+											'taxonomy'     => $taxonomy,
+											'orderby'      => $orderby,
+											'show_count'   => $show_count,
+											'pad_counts'   => $pad_counts,
+											'hierarchical' => $hierarchical,
+											'title_li'     => $title,
+											'hide_empty'   => $empty
+										);
+										$all_categories = get_categories( $args );
+                    
+										for ($x=0; $x<3; $x++) {
+											echo '<li>';
+											echo '<a href="'.get_term_link($all_categories[$x]->slug, 'product_cat').'">'.$all_categories[$x]->name.'</a>';	
+											echo '</li>';
+										} 
+										
+									?>
+									</ul>
+								</div>
+							</li>
 							<li id="menu-item-13"><a href="<?php echo home_url();?>/index.php/shop/">All Products</a></li>
 							<li id="menu-item-2676"><a href="<?php echo home_url();?>/index.php/contact-us/">Contact Us</a></li>
 							<li id="menu-item-14"><a href="<?php echo home_url();?>/index.php/my-account/">my account</a></li>
@@ -88,11 +122,9 @@ add_filter('show_admin_bar', '__return_false');
 							</div>
 						</li>
 						<li class="py-header-cart">
-							<a class="cart-customlocation" href="#py-mini-cart"uk-toggle>
-							<i class="pyf pyf-gouwuche"></i>
-							<span id="uk-badge" class="uk-badge">
-							<?php echo count(WC()->cart->get_cart());?>
-							</span>
+							<a class="cart-customlocation" data="#py-mini-cart" uk-toggle>
+								<i class="pyf pyf-gouwuche"></i>
+								<span id="uk-badge" class="uk-badge">0</span>
 							</a>
 						</li>
 					</ul>
@@ -135,3 +167,5 @@ add_filter('show_admin_bar', '__return_false');
 					}
 				?>
 					<?php do_action( 'customify/main/before' ); ?>
+
+

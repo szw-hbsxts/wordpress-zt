@@ -96,10 +96,11 @@ do_action( 'customify/site-end/after' );
 							<ul id="nav-customer-service" class="uk-nav">
 			                    <ul class="sitemap-list">
 
-									<li><a href="https://www.aoogeek.com/index.php/contact-us/">Contact Us</a></li>
-									<li><a href="https://www.aoogeek.com/index.php/privacy-policy/">Privacy Policy</a></li>
-									<li><a href="https://www.aoogeek.com/index.php/return-refund-policy/">Return &amp; Refund Policy</a></li>
-									<li><a href="https://www.aoogeek.com/index.php/terms-of-service/">Terms of service</a></li>
+									<li><a href="<?php echo home_url();?>/index.php/contact-us/">Contact Us</a></li>
+									<li><a href="<?php echo home_url();?>/index.php/privacy-policy/">Privacy Policy</a></li>
+									<li><a href="<?php echo home_url();?>/index.php/return-refund-policy/">Return &amp; Refund Policy</a></li>
+									<li><a href="<?php echo home_url();?>/index.php/terms-of-service/">Terms of service</a></li>
+									<li><a href="<?php echo home_url();?>/index.php/shipping-delivery/">Shipping & Delivery</a></li>
 								</ul>
 							</ul>
 						</div>                    
@@ -144,6 +145,40 @@ do_action( 'customify/site-end/after' );
 	<div class="uk-offcanvas-bar uk-flex uk-flex-column uk-flex-center">
 		<div class="menu-header_menu-container">
 			<ul id="nav-top-mobile" class="uk-nav uk-nav-primary uk-nav-center uk-margin-auto-vertical">
+				<li id="category">
+					<a href="#">Category</a>
+					<div class="category_list dhhd">
+						<ul>
+						<?php
+							$taxonomy     = 'product_cat';
+							$orderby      = 'name';  
+							$show_count   = 0;      // 1 for yes, 0 for no
+							$pad_counts   = 0;      // 1 for yes, 0 for no
+							$hierarchical = 1;      // 1 for yes, 0 for no  
+							$title        = '';  
+							$empty        = 0;
+
+							$args = array(
+								'taxonomy'     => $taxonomy,
+								'orderby'      => $orderby,
+								'show_count'   => $show_count,
+								'pad_counts'   => $pad_counts,
+								'hierarchical' => $hierarchical,
+								'title_li'     => $title,
+								'hide_empty'   => $empty
+							);
+							$all_categories = get_categories( $args );
+		
+							for ($x=0; $x<3; $x++) {
+								echo '<li>';
+								echo '<a href="'.get_term_link($all_categories[$x]->slug, 'product_cat').'">—  '.$all_categories[$x]->name.'</a>';	
+								echo '</li>';
+							} 
+							
+						?>
+						</ul>
+					</div>
+				</li>
 				<li><a href="<?php echo home_url();?>/index.php/shop/">All Products</a></li>
 				<li><a href="<?php echo home_url();?>/index.php/contact-us/">Contact Us</a></li>
 				<li><a href="<?php echo home_url();?>/index.php/my-account/">my account</a></li>
@@ -182,10 +217,10 @@ if(!is_account_page() && !is_checkout() && !is_cart()){
 		<div class="pswp__ui pswp__ui--hidden">
 			<div class="pswp__top-bar">
 				<div class="pswp__counter"></div>
-				<button class="pswp__button pswp__button--close" aria-label="关闭(Esc)"></button>
-				<button class="pswp__button pswp__button--share" aria-label="分享"></button>
-				<button class="pswp__button pswp__button--fs" aria-label="切换全屏模式"></button>
-				<button class="pswp__button pswp__button--zoom" aria-label="缩放"></button>
+				<button class="pswp__button pswp__button--close" aria-label="<?php esc_attr_e( 'Close (Esc)', 'woocommerce' ); ?>"></button>
+				<button class="pswp__button pswp__button--share" aria-label="<?php esc_attr_e( 'Share', 'woocommerce' ); ?>"></button>
+				<button class="pswp__button pswp__button--fs" aria-label="<?php esc_attr_e( 'Toggle fullscreen', 'woocommerce' ); ?>"></button>
+				<button class="pswp__button pswp__button--zoom" aria-label="<?php esc_attr_e( 'Zoom in/out', 'woocommerce' ); ?>"></button>
 				<div class="pswp__preloader">
 					<div class="pswp__preloader__icn">
 						<div class="pswp__preloader__cut">
@@ -197,8 +232,8 @@ if(!is_account_page() && !is_checkout() && !is_cart()){
 			<div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
 				<div class="pswp__share-tooltip"></div>
 			</div>
-			<button class="pswp__button pswp__button--arrow--left" aria-label="前一个 (向左的箭头)"></button>
-			<button class="pswp__button pswp__button--arrow--right" aria-label="后一个 (向右的箭头)"></button>
+			<button class="pswp__button pswp__button--arrow--left" aria-label="<?php esc_attr_e( 'Previous (arrow left)', 'woocommerce' ); ?>"></button>
+			<button class="pswp__button pswp__button--arrow--right" aria-label="<?php esc_attr_e( 'Next (arrow right)', 'woocommerce' ); ?>"></button>
 			<div class="pswp__caption">
 				<div class="pswp__caption__center"></div>
 			</div>
@@ -217,13 +252,15 @@ if(!is_account_page() && !is_checkout() && !is_cart()){
 
 ?>
 
-<link rel="stylesheet" href="/wp-content/themes/wordpress-zt/assets/css/photoswipe.css';?>">
-<link rel="stylesheet" href="/wp-content/plugins/woocommerce/assets/css/photoswipe/default-skin/default-skin.css">
-<script type='text/javascript' src='/wp-includes/js/comment-reply.min.js?ver=5.4.2'></script>
-<script type='text/javascript' src='/wp-content/plugins/woocommerce/assets/js/zoom/jquery.zoom.min.js?ver=1.7.21'></script>
-<script type='text/javascript' src='/wp-content/plugins/woocommerce/assets/js/flexslider/jquery.flexslider.min.js?ver=2.7.2'></script>
-<script type='text/javascript' src='/wp-content/plugins/woocommerce/assets/js/photoswipe/photoswipe.min.js?ver=4.1.1'></script>
-<script type='text/javascript' src='/wp-content/plugins/woocommerce/assets/js/photoswipe/photoswipe-ui-default.min.js?ver=4.1.1'></script>
+<link rel="stylesheet" href="<?php echo home_url();?>/wp-content/themes/wordpress-zt/assets/css/photoswipe.css">
+<link rel="stylesheet" href="<?php echo home_url();?>/wp-content/plugins/woocommerce/assets/css/photoswipe/default-skin/default-skin.css">
+<script type='text/javascript' src='<?php echo home_url();?>/wp-includes/js/comment-reply.min.js?ver=5.4.2'></script>
+<script type='text/javascript' src='<?php echo home_url();?>/wp-content/plugins/woocommerce/assets/js/zoom/jquery.zoom.min.js?ver=1.7.21'></script>
+<script type='text/javascript' src='<?php echo home_url();?>/wp-content/plugins/woocommerce/assets/js/flexslider/jquery.flexslider.min.js?ver=2.7.2'></script>
+<script type='text/javascript' src='<?php echo home_url();?>/wp-content/plugins/woocommerce/assets/js/photoswipe/photoswipe.min.js?ver=4.1.1'></script>
+<script type='text/javascript' src='<?php echo home_url();?>/wp-content/plugins/woocommerce/assets/js/photoswipe/photoswipe-ui-default.min.js?ver=4.1.1'></script>
+
+<script type='text/javascript' src='<?php echo home_url();?>/wp-content/plugins/woocommerce/assets/js/frontend/cart.min.js'></script>
 
 <script type='text/javascript'>
 /* <![CDATA[ */
@@ -237,11 +274,11 @@ var wc_single_product_params = {"i18n_required_rating_text":"\u8bf7\u9009\u62e9\
 
 <?php
 if(!is_product() && !is_account_page() && !is_checkout() && !is_cart()){
-	echo "<script type='text/javascript' src='/wp-content/plugins/woocommerce/assets/js/frontend/single-product.min.js'></script>";
+	echo "<script type='text/javascript' src='".home_url()."/wp-content/plugins/woocommerce/assets/js/frontend/single-product.min.js'></script>";
 }
 
 if(is_product()){
-	echo "<script type='text/javascript' src='/wp-content/themes/wordpress-zt/assets/js/reviews.js'></script>";
+	echo "<script type='text/javascript' src='".home_url()."/wp-content/themes/wordpress-zt/assets/js/reviews.js'></script>";
 }
 
 ?>
